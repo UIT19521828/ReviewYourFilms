@@ -167,7 +167,8 @@ namespace ReviewYourFilms
 
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult rs = (System.Windows.Forms.DialogResult)MessageBox.Show("Do you want to delete your review?!"
+            System.Windows.Forms.DialogResult rs = 
+                (System.Windows.Forms.DialogResult)MessageBox.Show("Do you want to delete your review?!"
                 ,"Delete Review", MessageBoxButton.YesNo);
             if (rs == System.Windows.Forms.DialogResult.Yes)
             {
@@ -189,7 +190,8 @@ namespace ReviewYourFilms
 
         private async void UpLoad_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult rs = (System.Windows.Forms.DialogResult)MessageBox.Show("Upload this review?"
+            System.Windows.Forms.DialogResult rs = 
+                (System.Windows.Forms.DialogResult)MessageBox.Show("Upload this review?"
                 , "upload Review", MessageBoxButton.YesNo);
             if (rs == System.Windows.Forms.DialogResult.Yes)
             {

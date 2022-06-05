@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -25,9 +24,9 @@ namespace ReviewYourFilms.Components
     public partial class ComListFilm : UserControl
     {
         MainWindow main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-
-        private DataFilm data;
-        private string fID;
+        
+        public string fID;
+        private DataFilm data;       
         private FirestoreDb db = AccountManager.Instance().LoadDB();
 
         public ComListFilm(DataFilm data, string fID)
@@ -45,7 +44,7 @@ namespace ReviewYourFilms.Components
             int x = 0;
             if (data.numRate != 0) x = data.totalPoint / data.numRate * 10;
 
-            txtPercent.Content = x.ToString();
+            txtPercent.Text = x.ToString();
             txtTitle.Text = data.name;
             string duration = data.time + "min";
             if (data.genre == "TV series")
@@ -103,10 +102,18 @@ namespace ReviewYourFilms.Components
             main.NavHost.Content = new DetailFilm(data, fID);
         }
 
-        private void RemoveWL_Click(object sender, RoutedEventArgs e)
+        private async void RemoveWL_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            main.watchList.panelWL.Children.Remove(this);
+            DocumentReference userRef = main.db.Collection("Users").Document(Client.uid);
+            await userRef.UpdateAsync("watchlist", FieldValue.ArrayRemove(fID));
             Client.watchlist.Remove(fID);
+            main.watchList.Total--;
+        }
+
+        private void txtTitle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            main.NavHost.Content = new DetailFilm(data, fID);
         }
     }
 }

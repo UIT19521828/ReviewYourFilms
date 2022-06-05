@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="ReviewYourFilms.Components.ComBanner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReviewYourFilms.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Height="400">
+    <Border CornerRadius="15" PreviewMouseDown="Border_PreviewMouseDown">
+        <Border.Background>
+            <ImageBrush x:Name="imgBanner" Stretch="UniformToFill"/>
+        </Border.Background>
+
+        <Grid Width="380" Height="185"
+              VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Border Background="Black" Opacity="0.3"
+                    CornerRadius="15"/>
+            <StackPanel Margin="18 10 0 0" >
+                <TextBox Style="{StaticResource textboxNonCarret}"
+                     FontWeight="SemiBold" x:Name="txtTitle" PreviewMouseDown="txtTitle_PreviewMouseDown"
+                     Text="Title" Foreground="White" FontSize="30" TextWrapping="NoWrap"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="15" Foreground="#B2B3B5" Content="Genre: "/>
+                    <Label FontSize="15" Foreground="White" Content="genre,..."
+                           x:Name="txtGenre" Margin="-3 0 0 0"/>
+                </StackPanel>
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Hidden">
+                    <TextBox Style="{StaticResource textBoxNoCnH}" Margin="3"
+                             x:Name="txtDescipt" Text="Overview" FontSize="15"
+                             VerticalScrollBarVisibility="Hidden"
+                             HorizontalScrollBarVisibility="Disabled"
+                             Foreground="#D5D4D5" FontWeight="DemiBold" TextWrapping="Wrap"/>
+                </ScrollViewer>
+                
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

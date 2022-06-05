@@ -7,7 +7,7 @@
              xmlns:ma="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:local="clr-namespace:ReviewYourFilms.Components"
              mc:Ignorable="d" 
-             d:DesignWidth="800" MinWidth="800"
+             d:DesignWidth="800" MinWidth="900"
              Height="225" Margin="15">
     <Border CornerRadius="12" BorderThickness="0.3" BorderBrush="#A3A6AA">
         <Grid>
@@ -46,19 +46,19 @@
                                                Fill="#204529" StrokeThickness="0"/>
                             </lvc:PieChart.Series>
                         </lvc:PieChart>
-                        <Label Height="55" Width="55"
+                        <TextBlock Height="55" Width="55"
                                    Background="Transparent"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
-                                   Padding="15 9 0 0"
-                                   FontWeight="Bold"
-                                   Content="00" x:Name="txtPercent"
+                                   Padding="5 9 0 0"
+                                   FontWeight="Bold" TextAlignment="Center"
+                                   Text="00" x:Name="txtPercent"
                                    Foreground="White" FontSize="25"/>
                     </Grid>
                     <StackPanel Grid.Column="1" Margin="7 8 0 0">
                         <TextBox Style="{StaticResource textboxNonCarret}"
                                  Text="Title" FontWeight="Bold" x:Name="txtTitle"
-                                 FontSize="25"/>
+                                 FontSize="25" PreviewMouseDown="txtTitle_PreviewMouseDown"/>
                         <StackPanel Orientation="Horizontal" Margin="0 5 0 0"
                                     x:Name="sPanel2">
                             <TextBox Style="{StaticResource textboxUnderline}"
@@ -90,7 +90,7 @@
                             Orientation="Horizontal">
                     <Grid x:Name="myRate" Width="30" Height="30" Visibility="Collapsed">
                         <Ellipse  Fill="#21D07A" x:Name="fillE"/>
-                        <TextBlock Text="0" TextAlignment="Center" x:Name="txtMyRate"
+                        <TextBlock Text="-1" TextAlignment="Center" x:Name="txtMyRate"
                                    FontWeight="Bold" Foreground="White"
                                    FontSize="19" Margin="0 -2 0 0"
                                    VerticalAlignment="Center"/>

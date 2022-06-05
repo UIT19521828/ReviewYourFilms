@@ -1264,3 +1264,7 @@ E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Authentication\SignIn
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Authentication\SignUp.baml
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\AuthWindow.g.cs
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\AuthWindow.baml
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Components\ComBanner.g.cs
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Components\ComBanner.baml
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\bin\Debug\Gu.Wpf.FlipView.dll
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\bin\Debug\Gu.Wpf.FlipView.xml

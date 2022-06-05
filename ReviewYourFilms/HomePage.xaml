@@ -7,8 +7,9 @@
       xmlns:ma="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:Components="clr-namespace:ReviewYourFilms.Components" 
+      xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
       x:Class="ReviewYourFilms.HomePage"
-      mc:Ignorable="d"
+      mc:Ignorable="d" Loaded="Page_Loaded"
       d:DesignHeight="500" d:DesignWidth="1200"
       Title="HomePage" Background="Transparent">
     <ScrollViewer VerticalScrollBarVisibility="Auto"
@@ -22,18 +23,12 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid>
-                        <ma:TransitionerSlide/>
+                        <gu:FlipView x:Name="flipView" Background="Transparent"
+                                     ArrowPlacement="Inside" ShowIndex="False"/>
                     </Grid>
-
-                    <TextBox x:Name="txtBanner" FontSize="40" Foreground="White"
-                             Text="" VerticalAlignment="Bottom" Margin="20"
-                             Width="Auto" Cursor="Hand" FontWeight="Bold" 
-                             HorizontalAlignment="Right" Style="{StaticResource textboxNonCarret}"
-                             PreviewKeyDown="txtBanner_PreviewKeyDown"/>
-                    <Label FontSize="40" Foreground="#B2B3B5" 
+                    <Label FontSize="40" Foreground="#B2B3B5"  Opacity="0.5"
                            Content="Trending film" VerticalAlignment="Top" Margin="20 0 0 0"
-                           Width="Auto" Cursor="Hand" FontWeight="Regular"/>
-
+                           Width="Auto" Cursor="Hand" FontWeight="Regular" FontFamily="Showcard Gothic"/>
                 </Grid>
                 <WrapPanel Grid.Row="1" Margin="35 0 0 0"
                             x:Name="stackRowF" Orientation="Vertical">

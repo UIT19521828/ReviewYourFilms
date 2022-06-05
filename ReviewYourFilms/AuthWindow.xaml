@@ -33,7 +33,6 @@
             <Border Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                     Width="400" Height="500" Margin="0 -35 0 0"
                     Background="Black" Opacity="0.5" CornerRadius="12">
-                
             </Border>
             <Frame x:Name="frameAuth" Grid.Row="1" Width="400" Height="500"
                    Margin="0 -35 0 0" NavigationUIVisibility="Hidden"/>
