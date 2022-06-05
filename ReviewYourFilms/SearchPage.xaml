@@ -1,0 +1,61 @@
+﻿<Page x:Class="ReviewYourFilms.SearchPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ma="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:local="clr-namespace:ReviewYourFilms"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SearchPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid  Background="#202020">
+            <Label FontWeight="SemiBold"
+                Grid.Column="0" Foreground="White"
+                Content="Search Film" FontSize="35" Padding="15 0 0 0" 
+                VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <ma:PackIcon Kind="Search" Foreground="Silver" Margin="15,0,0,0" 
+                         Width="30" Height="30" VerticalAlignment="Center"/>
+            <TextBox Foreground="#A3A6AA" VerticalAlignment="Center"
+                     FontSize="18" Grid.Column="1"/>
+            <Button Grid.Column="2" Content="Search" Margin="3"/>
+        </Grid>
+        <StackPanel Grid.Row="2">
+            <ma:PackIcon Kind="Category" Foreground="Silver" Margin="15,0,0,0" 
+                         Width="30" Height="30" VerticalAlignment="Center"/>
+            <ComboBox Foreground="#A3A6AA" VerticalAlignment="Center"
+                      FontSize="18" IsEditable="True" SelectedValuePath="Content">
+                <ComboBoxItem>Action</ComboBoxItem>
+                <ComboBoxItem>Adventure</ComboBoxItem>
+                <ComboBoxItem>Animation</ComboBoxItem>
+                <ComboBoxItem>Anime</ComboBoxItem>
+                <ComboBoxItem>Comedy</ComboBoxItem>
+                <ComboBoxItem>Crime</ComboBoxItem>
+                <ComboBoxItem>Documentary</ComboBoxItem>
+                <ComboBoxItem>Drama</ComboBoxItem>
+                <ComboBoxItem>Family</ComboBoxItem>
+                <ComboBoxItem>Fantasy</ComboBoxItem>
+                <ComboBoxItem>History</ComboBoxItem>
+                <ComboBoxItem>Music</ComboBoxItem>
+                <ComboBoxItem>Mystery</ComboBoxItem>
+                <ComboBoxItem>Romance</ComboBoxItem>
+                <ComboBoxItem>Sport</ComboBoxItem>
+                <ComboBoxItem>War</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</Page>

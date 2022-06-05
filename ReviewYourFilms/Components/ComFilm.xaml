@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ReviewYourFilms.ConFilm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReviewYourFilms"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             Height="360" Width="200" Margin="0 0 20 0">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" CornerRadius="12" Cursor="Hand">
+            <Border.Background>
+                <ImageBrush x:Name="imgPoster"
+                            Stretch="Fill" 
+                            ImageSource="\Images\poster_placeholder.png"/>
+            </Border.Background>
+            <Button Background="Transparent" BorderThickness="0"
+                    Height="300" Click="NewDetail_Click"/>
+        </Border>
+        <Grid Grid.Row="1">
+            <Border Height="40" Width="40" CornerRadius="40"
+                    Background="Black"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"                 
+                    Margin="12 -24 0 0">
+                <lvc:PieChart Hoverable="False" StartingRotationAngle="0"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"                            
+                              InnerRadius="17"
+                              Margin="0 0 0 -1.5">
+                    <lvc:PieChart.Series>
+                        <lvc:PieSeries x:Name="pieHas" Values="15" Fill="#21D07A"
+                                       StrokeThickness="0"/>
+                        <lvc:PieSeries x:Name="pieNo" Values="4" Fill="#204529"
+                                       StrokeThickness="0"/>
+                    </lvc:PieChart.Series>
+                </lvc:PieChart>
+            </Border>
+            <TextBlock Height="40" Width="40"
+                       Background="Transparent"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center" Margin="12 -24 0 0"
+                       FontWeight="Bold"
+                       Padding="0 5 0 0"
+                       Text="00" x:Name="txtPercent"
+                       Foreground="White" FontSize="22"/>
+        </Grid>
+        <TextBox Grid.Row="2" Text="Title" Style="{StaticResource textboxNonCarret}"
+                 Margin="2 0 0 0" x:Name="txtTitle" FontSize="15" TextWrapping="Wrap"/>
+
+    </Grid>
+</UserControl>

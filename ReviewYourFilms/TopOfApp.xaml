@@ -1,0 +1,61 @@
+﻿<Page x:Class="ReviewYourFilms.TopOfApp"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ReviewYourFilms"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1350"
+      Title="TopOfApp">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Border BorderThickness="0 0 0 0.4" BorderBrush="#A3A6AA" Background="#202020">
+            <Label FontWeight="SemiBold"
+                Grid.Column="0" Foreground="White"
+                Content="RvF Charts" FontSize="35" Margin="15,0,0,0"
+                VerticalAlignment="Center"/>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderThickness="0 0 0.4 0" BorderBrush="#A3A6AA">
+
+            </Border>
+            <StackPanel  Background="#202020">
+                <RadioButton Style="{StaticResource menuButton}" Height="25"
+                             Margin="15 20 7 0">
+                    <TextBlock Text="Top 100 Movies" 
+                     Style="{StaticResource menuButtonText}" Foreground="#6691B0"/>
+                </RadioButton>
+                <RadioButton Style="{StaticResource menuButton}" Height="25"
+                             Margin="15 2 7 0">
+                    <TextBlock Text="Top 100 TV Series" 
+                     Style="{StaticResource menuButtonText}" Foreground="#6691B0"/>
+                </RadioButton>
+            </StackPanel>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="301*"/>
+                </Grid.RowDefinitions>
+                <Label Foreground="White" HorizontalAlignment="Left" Width="Auto"
+                       Margin="15,0,0,0" Content="Top 100 Movies" VerticalAlignment="Center"
+                       FontSize="20" FontWeight="SemiBold"/>
+                <Grid Grid.Row="1">
+
+                </Grid>
+                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto">
+                    <WrapPanel/>
+                </ScrollViewer>
+                
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

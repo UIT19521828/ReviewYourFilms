@@ -1,0 +1,218 @@
+﻿<Page x:Class="ReviewYourFilms.DetailFilm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      xmlns:local="clr-namespace:ReviewYourFilms" 
+      xmlns:vlc="clr-namespace:LibVLCSharp.WPF;assembly=LibVLCSharp.WPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1450"
+      Title="DetailFilm" Background="Transparent">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+        <Border Background="Transparent">
+            <Grid Margin="0 7 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="375"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="95"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource styleless}" Margin="30,0,7,0"
+                                Background="Transparent" BorderThickness="0"
+                                Cursor="Hand" Width="30" Height="30" 
+                                Click="NavBack_Click">
+                            <fa:ImageAwesome Icon="ArrowLeft"
+                                             Foreground="White"/>
+                        </Button>
+                        <TextBox x:Name="txtTitle" FontWeight="SemiBold"
+                             Grid.Column="0" Style="{StaticResource textboxNonCarret}"
+                             Text="Title" FontSize="35" 
+                             VerticalAlignment="Center" FontFamily="Arial Rounded MT Bold"/>
+                    </StackPanel>
+                    
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="RyF RATING" Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Bold" Foreground="#BCBCBC" FontFamily="Arial Rounded MT Bold"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Star" Foreground="Yellow"
+                                             Width="20" Height="20"
+                                             HorizontalAlignment="Left" Margin="10 0 0 7"/>
+                            <Label x:Name="lbAvgRate" FontSize="14"
+                                   Content="0.0/10" Foreground="White"
+                                   FontWeight="Bold" Margin="2 -1 0 0"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="2" Margin="5 0 5 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="YOUR RATING" Grid.Row="0"
+                               HorizontalAlignment="Center" FontSize="14"
+                               FontWeight="Bold" Foreground="#BCBCBC" FontFamily="Arial Rounded MT Bold"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Star" Foreground="#2576C8"
+                                             Width="20" Height="20"
+                                             HorizontalAlignment="Left" Margin="10 0 0 7"/>
+                            <Label x:Name="lbMyRate" FontSize="14"
+                                   Content="Unrated" Foreground="#2576C8"
+                                   FontWeight="Bold" Margin="2 -1 0 0"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" Margin="10 7 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="666"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border CornerRadius="14" Grid.Column="0" Margin="15 0 0 0"
+                            BorderThickness="0.3" BorderBrush="Silver">
+                        <Border.Background>
+                            <ImageBrush x:Name="imgPoster"
+                                        ImageSource="\Images\poster_placeholder.png" 
+                                        Stretch="Fill"/>
+                        </Border.Background>
+                    </Border>
+                    <Grid Grid.Column="1">
+                        <Border CornerRadius="14" x:Name="vlcBorder">
+                            <vlc:VideoView Height="370" Width="666" x:Name="trailerPlayer">
+                                <Button VerticalAlignment="Bottom" Background="Transparent"
+                                    BorderThickness="0"
+                                    Margin="15 0 0 15"  Width="70" Height="70"
+                                    HorizontalAlignment="Left"
+                                    Click="Play_Click">
+                                    <materialDesign:PackIcon 
+                                        Style="{StaticResource buttonOutline}"
+                                        Background="Transparent"
+                                        x:Name="iconPlay" Width="70" Height="70" 
+                                        Margin="-18 -2 -10 -2"
+                                        Kind="PauseCircleOutline"/>
+                                </Button>
+                            </vlc:VideoView>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <StackPanel Margin="25 0 0 0">
+                            <Border Background="#2D2D31" Height="160" Width="300"
+                                VerticalAlignment="Top" HorizontalAlignment="Left"
+                                Style="{StaticResource borderRainbow}"
+                                CornerRadius="8" BorderThickness="0.5"                      
+                                Padding="6 0 0 0">
+                                <StackPanel Orientation="Vertical">
+                                    <Label Content="Infomation" Foreground="White"
+                                   FontWeight="SemiBold" FontSize="18" Margin="0 5 0 5"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Time: " Style="{StaticResource labelDF}"/>
+                                        <TextBox x:Name="txtTime" VerticalAlignment="Center"
+                                                 Style="{StaticResource textBoxNoCnH}"
+                                                 Text="Time" FontSize="14"/>    
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Year: " Style="{StaticResource labelDF}"/>
+                                        <TextBox x:Name="txtYear" VerticalAlignment="Center"
+                                                 Style="{StaticResource textBoxNoCnH}"
+                                                 Text="Year" FontSize="14"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Category: " Style="{StaticResource labelDF}"/>
+                                        <TextBox x:Name="txtGenre" VerticalAlignment="Center"
+                                                 Style="{StaticResource textBoxNoCnH}"
+                                                 Text="Genre" FontSize="14"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Director: " Style="{StaticResource labelDF}"/>
+                                        <TextBox x:Name="txtDir" VerticalAlignment="Center"
+                                                 Style="{StaticResource textboxNonCarret}"
+                                                 Text="Director" FontSize="14"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            <Label Content="Overview" FontSize="20" FontWeight="Bold"
+                                   Foreground="White" Margin="0 5 0 0"/>
+                            <Border CornerRadius="8" BorderThickness="0.4"
+                                    Margin="0 0 10 0"
+                                    BorderBrush="#BCBCBC" Padding="4">
+                                <TextBox TextWrapping="Wrap" Style="{StaticResource textBoxNoCnH}"
+                                         Text="Test" Margin="3 0 0 0" x:Name="txtDescript" 
+                                         FontSize="14" FontWeight="Regular" MaxHeight="157"
+                                         VerticalScrollBarVisibility="Hidden"
+                                         HorizontalScrollBarVisibility="Disabled"/>
+                            </Border>
+                        </StackPanel>
+                        
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2" Margin="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="650"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0"  Margin="20 10 50 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="265*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Genre" FontSize="20"
+                               FontWeight="Bold" Foreground="White"/>
+                        <WrapPanel x:Name="panelButtonG" Grid.Row="1" Orientation="Horizontal"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="154*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Border BorderBrush="#F5C518" BorderThickness="0 0 0 1"
+                                    CornerRadius="8">
+                                <Label Content="Top Review" Foreground="#F5C518" Margin="10 0 10 0"
+                                   FontSize="25" VerticalAlignment="Center" FontWeight="Bold"/>
+                            </Border>
+                            <Border Width="140" CornerRadius="15" Background="#A3A6AA"
+                                    VerticalAlignment="Bottom" Margin="10 0 5 3">
+                                <Button Background="Transparent" BorderThickness="0"
+                                        HorizontalAlignment="Left" Cursor="Hand"
+                                        Click="OpenReview_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:ImageAwesome Icon="ArrowRight" Width="20" Height="20"
+                                                Foreground="Black" Margin="0 0 5 0"/>
+                                        <TextBlock Text="All Reviews" Foreground="Black"/>
+                                    </StackPanel>
+                                </Button>
+                            </Border>
+                        </StackPanel>
+                        <DockPanel x:Name="panelReview"
+                                   Grid.Row="1" Margin="0 10 0 0">
+                            <Label Style="{StaticResource labelDF}" HorizontalAlignment="Left"
+                                   Width="auto" x:Name="lbTempReview"
+                                   Content="This Film have no review right now, let's Write first review"/>
+                        </DockPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </ScrollViewer>
+
+</Page>
