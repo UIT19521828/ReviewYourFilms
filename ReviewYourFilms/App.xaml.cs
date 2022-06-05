@@ -31,7 +31,8 @@ namespace ReviewYourFilms
             (new BrushConverter().ConvertFrom("#669DF6"));
         public static SolidColorBrush greyBrush = (SolidColorBrush)
             (new BrushConverter().ConvertFrom("#373737"));
-        
+        public static SolidColorBrush redBrush = (SolidColorBrush)
+            (new BrushConverter().ConvertFrom("#FF6054"));       
     }
 
     public class Client

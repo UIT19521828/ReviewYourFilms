@@ -236,7 +236,15 @@ namespace ReviewYourFilms
                 btnEdit.Visibility = Visibility.Visible;
 
                 MessageBox.Show("Upload review Success!");
-            }                      
+
+                DocumentReference fRef = db.Collection("Films").Document(fID);
+                DocumentSnapshot fSS = await fRef.GetSnapshotAsync();
+                DataFilm filmData = fSS.ConvertTo<DataFilm>();
+                double average = 0;
+                if (filmData.numRate != 0) average = (double)filmData.totalPoint / filmData.numRate;
+                average = Math.Round(average, 4);
+                await fRef.UpdateAsync("rating", average);
+            }          
         }
 
         private void MoveRight_Click(object sender, RoutedEventArgs e)

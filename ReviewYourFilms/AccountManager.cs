@@ -135,7 +135,7 @@ namespace ReviewYourFilms
 
                 await authProvider.SendEmailVerificationAsync(link.FirebaseToken);
                 string userid = link.User.LocalId;
-                List<string> array = null;
+                List<string> array = new List<string>();
                 DocumentReference docRef = db.Collection("Users").Document(userid);
                 Dictionary<string, object> user = new Dictionary<string, object>
                 {

@@ -9,7 +9,7 @@
       Height="500" Width="400"
       Title="SignIn">
 
-    <Grid>
+    <Grid x:Name="gridSU">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="50"/>
@@ -30,28 +30,28 @@
         <StackPanel Grid.Row="2" Grid.RowSpan="2">
             <Border Width="350" Height="50" Margin="5 3 5 5" CornerRadius="12"
                     Background="#2B2B38">
-                <TextBox x:Name="txtEmail"
+                <TextBox x:Name="txtEmail" KeyDown="txtEmail_KeyDown"
                         Margin="7 0 7 0" BorderThickness="0" VerticalAlignment="Center"
                         FontSize="23" Foreground="White" Background="Transparent"
                         TextAlignment="Left" ma:HintAssist.Hint="User Email"/>
             </Border>
             <Border Width="350" Height="50" Margin="5 3 5 5" CornerRadius="12"
                     Background="#2B2B38">
-                <TextBox x:Name="txtNickname"
+                <TextBox x:Name="txtNickname" KeyDown="txtNickname_KeyDown"
                          Margin="7 0 7 0" BorderThickness="0" VerticalAlignment="Center"
                          FontSize="23" Foreground="White" Background="Transparent"
                          TextAlignment="Left" ma:HintAssist.Hint="Nickname"/>
             </Border>
             <Border Width="350" Height="50" Margin="5 3 5 5" CornerRadius="12"
                     Background="#2B2B38">
-                <PasswordBox x:Name="txtPass"
+                <PasswordBox x:Name="txtPass" KeyDown="txtPass_KeyDown"
                         Margin="7 0 7 0" BorderThickness="0" VerticalAlignment="Center"
                         FontSize="23" Foreground="White" Background="Transparent"
                         ma:HintAssist.Hint="Password"/>
             </Border>
             <Border Width="350" Height="50" Margin="5 3 5 5" CornerRadius="12"
                     Background="#2B2B38">
-                <PasswordBox x:Name="txtRePass"
+                <PasswordBox x:Name="txtRePass" KeyDown="txtRePass_KeyDown"
                         Margin="7 0 7 0" BorderThickness="0" VerticalAlignment="Center"
                         FontSize="23" Foreground="White" Background="Transparent"
                         ma:HintAssist.Hint="Repeat Password"/>

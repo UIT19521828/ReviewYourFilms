@@ -9,7 +9,6 @@ using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -29,12 +28,13 @@ namespace ReviewYourFilms
         private LibVLCSharp.Shared.MediaPlayer mediaPlayer;
         private DataFilm film;
         private string fid;
-
+        DocumentReference userRef;
         public DetailFilm(DataFilm film, string fid)
         {
             InitializeComponent();
             this.film = film;
-            this.fid = fid;           
+            this.fid = fid;
+            userRef = main.db.Collection("Users").Document(Client.uid);
             lib = new LibVLC();
             mediaPlayer = new LibVLCSharp.Shared.MediaPlayer(lib);
             trailerPlayer.MediaPlayer = mediaPlayer;
@@ -70,7 +70,7 @@ namespace ReviewYourFilms
             if(mySS.Count>0)
             {
                 DataReview dataReview = mySS[0].ConvertTo<DataReview>();
-                lbMyRate.Content = dataReview.score;
+                lbMyRate.Content = dataReview.score + "/10";
             }
 
             foreach(var item in film.category)
@@ -91,6 +91,8 @@ namespace ReviewYourFilms
                 lbTempReview.Visibility = Visibility.Collapsed;
                 DataReview dataReview = rvSS[0].ConvertTo<DataReview>();
                 ComReview topRv = new ComReview(dataReview, rvSS[0].Id);
+                topRv.HorizontalAlignment = HorizontalAlignment.Left;
+
                 panelReview.Children.Add(topRv);
             }
         }
@@ -138,6 +140,25 @@ namespace ReviewYourFilms
         {
             mediaPlayer.Pause();
             main.NavHost.Content = new ReviewPage(film, fid);
+        }
+
+        private async void WatchList_Click(object sender, RoutedEventArgs e)
+        {
+            DocumentSnapshot userSS = await userRef.GetSnapshotAsync();
+            if (!Client.watchlist.Contains(fid))
+            {
+                await userRef.UpdateAsync("watchlist", FieldValue.ArrayUnion(fid));
+                MessageBox.Show("Add to your watch list!");
+                Client.watchlist.Add(fid);
+                btnWL.Foreground = BaseColor.redBrush;
+            }
+            else
+            {
+                await userRef.UpdateAsync("watchlist", FieldValue.ArrayRemove(fid));
+                MessageBox.Show("Đã xóa phim khỏi Watch List của bạn");
+                Client.watchlist.Remove(fid);
+                btnWL.Foreground = Brushes.White;
+            }
         }
     }
 }

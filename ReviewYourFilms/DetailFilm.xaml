@@ -55,9 +55,9 @@
                             <fa:ImageAwesome Icon="Star" Foreground="Yellow"
                                              Width="20" Height="20"
                                              HorizontalAlignment="Left" Margin="10 0 0 7"/>
-                            <Label x:Name="lbAvgRate" FontSize="14"
+                            <Label x:Name="lbAvgRate" FontSize="15" FontFamily="Roboto"
                                    Content="0.0/10" Foreground="White"
-                                   FontWeight="Bold" Margin="2 -1 0 0"/>
+                                   FontWeight="Bold" Margin="2 1 0 0"/>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Column="2" Margin="5 0 5 0">
@@ -72,9 +72,9 @@
                             <fa:ImageAwesome Icon="Star" Foreground="#2576C8"
                                              Width="20" Height="20"
                                              HorizontalAlignment="Left" Margin="10 0 0 7"/>
-                            <Label x:Name="lbMyRate" FontSize="14"
+                            <Label x:Name="lbMyRate" FontSize="15"
                                    Content="Unrated" Foreground="#2576C8"
-                                   FontWeight="Bold" Margin="2 -1 0 0"/>
+                                   FontWeight="Bold" Margin="2 0 0 0"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -93,9 +93,10 @@
                                         Stretch="Fill"/>
                         </Border.Background>
                     </Border>
-                    <Grid Grid.Column="1">
-                        <Border CornerRadius="14" x:Name="vlcBorder">
-                            <vlc:VideoView Height="370" Width="666" x:Name="trailerPlayer">
+                    <Grid Grid.Column="1" Margin="5 0 0 0">
+                        <Border CornerRadius="14" x:Name="vlcBorder" BorderBrush="Silver"
+                                BorderThickness="0.5">
+                            <vlc:VideoView  x:Name="trailerPlayer" Margin="1">
                                 <Button VerticalAlignment="Bottom" Background="Transparent"
                                     BorderThickness="0"
                                     Margin="15 0 0 15"  Width="70" Height="70"
@@ -113,40 +114,51 @@
                     </Grid>
                     <Grid Grid.Column="2">
                         <StackPanel Margin="25 0 0 0">
-                            <Border Background="#2D2D31" Height="160" Width="300"
-                                VerticalAlignment="Top" HorizontalAlignment="Left"
-                                Style="{StaticResource borderRainbow}"
-                                CornerRadius="8" BorderThickness="0.5"                      
-                                Padding="6 0 0 0">
-                                <StackPanel Orientation="Vertical">
-                                    <Label Content="Infomation" Foreground="White"
-                                   FontWeight="SemiBold" FontSize="18" Margin="0 5 0 5"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Time: " Style="{StaticResource labelDF}"/>
-                                        <TextBox x:Name="txtTime" VerticalAlignment="Center"
-                                                 Style="{StaticResource textBoxNoCnH}"
-                                                 Text="Time" FontSize="14"/>    
+                            <StackPanel Orientation="Horizontal">
+                                <Border Background="#2D2D31" Height="160" Width="300"
+                                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                                        Style="{StaticResource borderRainbow}"
+                                        CornerRadius="8" BorderThickness="0.5"                      
+                                        Padding="6 0 0 0">
+                                    <StackPanel Orientation="Vertical">
+                                        <Label Content="Infomation" Foreground="White"
+                                               FontWeight="SemiBold" FontSize="18" Margin="0 5 0 5"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Time: " Style="{StaticResource labelDF}"/>
+                                            <TextBox x:Name="txtTime" VerticalAlignment="Center"
+                                                     Style="{StaticResource textBoxNoCnH}"
+                                                     Text="Time" FontSize="14"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Year: " Style="{StaticResource labelDF}"/>
+                                            <TextBox x:Name="txtYear" VerticalAlignment="Center"
+                                                     Style="{StaticResource textBoxNoCnH}"
+                                                     Text="Year" FontSize="14"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Category: " Style="{StaticResource labelDF}"/>
+                                            <TextBox x:Name="txtGenre" VerticalAlignment="Center"
+                                                     Style="{StaticResource textBoxNoCnH}"
+                                                     Text="Genre" FontSize="14"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Director: " Style="{StaticResource labelDF}"/>
+                                            <TextBox x:Name="txtDir" VerticalAlignment="Center"
+                                                     Style="{StaticResource textboxNonCarret}"
+                                                     Text="Director" FontSize="14"/>
+                                        </StackPanel>
+                                        
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Year: " Style="{StaticResource labelDF}"/>
-                                        <TextBox x:Name="txtYear" VerticalAlignment="Center"
-                                                 Style="{StaticResource textBoxNoCnH}"
-                                                 Text="Year" FontSize="14"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Category: " Style="{StaticResource labelDF}"/>
-                                        <TextBox x:Name="txtGenre" VerticalAlignment="Center"
-                                                 Style="{StaticResource textBoxNoCnH}"
-                                                 Text="Genre" FontSize="14"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Director: " Style="{StaticResource labelDF}"/>
-                                        <TextBox x:Name="txtDir" VerticalAlignment="Center"
-                                                 Style="{StaticResource textboxNonCarret}"
-                                                 Text="Director" FontSize="14"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
+                                </Border>
+                                <Button VerticalAlignment="Top" Background="Transparent" Margin="10 0 0 0"
+                                        BorderThickness="0" Style="{StaticResource styleless}" Width="50"
+                                        Height="70" Click="WatchList_Click">
+                                    <materialDesign:PackIcon Kind="Bookmark" Foreground="#B2B3B5" Cursor="Hand"
+                                                             Width="60" Height="80" x:Name="btnWL"
+                                                             Margin="-5 -10 0 0"/>
+                                </Button>
+                            </StackPanel>
+                            
                             <Label Content="Overview" FontSize="20" FontWeight="Bold"
                                    Foreground="White" Margin="0 5 0 0"/>
                             <Border CornerRadius="8" BorderThickness="0.4"
@@ -165,7 +177,7 @@
                 <Grid Grid.Row="2" Margin="15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="650"/>
+                        <ColumnDefinition Width="710"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0"  Margin="20 10 50 0">
@@ -203,11 +215,12 @@
                                 </Button>
                             </Border>
                         </StackPanel>
-                        <DockPanel x:Name="panelReview"
-                                   Grid.Row="1" Margin="0 10 0 0">
+                        <DockPanel x:Name="panelReview" LastChildFill="True"
+                                   Grid.Row="1" Margin="0 10 0 0" HorizontalAlignment="Left">
                             <Label Style="{StaticResource labelDF}" HorizontalAlignment="Left"
                                    Width="auto" x:Name="lbTempReview"
                                    Content="This Film have no review right now, let's Write first review"/>
+
                         </DockPanel>
                     </Grid>
                 </Grid>
