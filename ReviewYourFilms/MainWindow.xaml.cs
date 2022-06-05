@@ -23,10 +23,10 @@ namespace ReviewYourFilms
         private CornerRadius crNor = new CornerRadius(10);
         private CornerRadius crMax = new CornerRadius(0);
         private CornerRadius crSecond = new CornerRadius(0, 0, 10, 10);
-        private HomePage homePage = new HomePage();
-        private WatchList watchList = new WatchList();
-        private TopOfApp topOfApp = new TopOfApp();
-        private SearchPage searchPage = new SearchPage();
+        public HomePage homePage = new HomePage();
+        public WatchList watchList = new WatchList();
+        public TopOfApp topOfApp = new TopOfApp();
+        public SearchPage searchPage = new SearchPage();
 
         public FirestoreDb db;
 
@@ -70,7 +70,11 @@ namespace ReviewYourFilms
 
         private void ButtonX_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            System.Windows.Forms.DialogResult rs = (
+                System.Windows.Forms.DialogResult)MessageBox.Show("Do you want to Exit App?"
+                , "Exit App?", MessageBoxButton.YesNo);
+            if (rs == System.Windows.Forms.DialogResult.Yes)
+                Environment.Exit(0);
         }
 
         private void OpenMenuBoard(object sender, RoutedEventArgs e)

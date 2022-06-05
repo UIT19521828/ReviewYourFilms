@@ -28,19 +28,39 @@ namespace ReviewYourFilms
         private LibVLCSharp.Shared.MediaPlayer mediaPlayer;
         private DataFilm film;
         private string fid;
-        DocumentReference userRef;
+        private DocumentReference userRef;
+        public WatchList wl;
         public DetailFilm(DataFilm film, string fid)
         {
             InitializeComponent();
             this.film = film;
             this.fid = fid;
             userRef = main.db.Collection("Users").Document(Client.uid);
+            wl = main.watchList;
             lib = new LibVLC();
             mediaPlayer = new LibVLCSharp.Shared.MediaPlayer(lib);
             trailerPlayer.MediaPlayer = mediaPlayer;
 
             LoadDetailFilm();
             LoadTopReview();
+        }
+        private void CreateButtonGenre(string item)
+        {
+            Border border = new Border();
+            border.Width = Double.NaN;
+            border.CornerRadius = new CornerRadius(15);
+            border.Background = BaseColor.greyBrush;
+            border.Margin = new Thickness(0, 0, 5, 0);
+
+            Button btnGenre = new Button();
+            btnGenre.BorderThickness = new Thickness(0);
+            btnGenre.Cursor = Cursors.Hand;
+            btnGenre.Foreground = Brushes.White;
+            btnGenre.Background = Brushes.Transparent;
+            btnGenre.Content = item;
+
+            border.Child = btnGenre;
+            panelButtonG.Children.Add(border);
         }
         private async void LoadDetailFilm()
         {
@@ -78,7 +98,6 @@ namespace ReviewYourFilms
                 CreateButtonGenre(item);
             }
         }
-
         private async void LoadTopReview()
         {
             Query rvRef = main.db.Collection("Reviews").WhereEqualTo("film", fid)
@@ -96,7 +115,6 @@ namespace ReviewYourFilms
                 panelReview.Children.Add(topRv);
             }
         }
-
         private void Play_Click(object sender, RoutedEventArgs e)
         {
             if (mediaPlayer.IsPlaying)
@@ -110,55 +128,52 @@ namespace ReviewYourFilms
                 mediaPlayer.Play();
                 iconPlay.Kind = MaterialDesignThemes.Wpf.PackIconKind.PauseCircleOutline;
             }
-        }
-
-        private void CreateButtonGenre(string item)
-        {
-            Border border = new Border();
-            border.Width = Double.NaN;
-            border.CornerRadius = new CornerRadius(15);
-            border.Background = BaseColor.greyBrush;
-            border.Margin = new Thickness(0, 0, 5, 0);
-
-            Button btnGenre = new Button();
-            btnGenre.BorderThickness = new Thickness(0);
-            btnGenre.Cursor = Cursors.Hand;
-            btnGenre.Foreground = Brushes.White;
-            btnGenre.Background = Brushes.Transparent;
-            btnGenre.Content = item;
-
-            border.Child = btnGenre;
-            panelButtonG.Children.Add(border);
-        }
+        }      
         private void NavBack_Click(object sender, RoutedEventArgs e)
         {
-            mediaPlayer.Pause();
+            if (mediaPlayer.IsPlaying)
+            {
+                mediaPlayer.Pause();
+                iconPlay.Kind = MaterialDesignThemes.Wpf.PackIconKind.PlayCircleOutline;
+            }
             main.NavHost.GoBack();          
         }
-
         private void OpenReview_Click(object sender, RoutedEventArgs e)
         {
-            mediaPlayer.Pause();
+            if (mediaPlayer.IsPlaying)
+            {
+                mediaPlayer.Pause();
+                iconPlay.Kind = MaterialDesignThemes.Wpf.PackIconKind.PlayCircleOutline;
+            }
             main.NavHost.Content = new ReviewPage(film, fid);
         }
-
         private async void WatchList_Click(object sender, RoutedEventArgs e)
         {
             DocumentSnapshot userSS = await userRef.GetSnapshotAsync();
             if (!Client.watchlist.Contains(fid))
             {
                 await userRef.UpdateAsync("watchlist", FieldValue.ArrayUnion(fid));
-                MessageBox.Show("Add to your watch list!");
+                MessageBox.Show("Added to your watchlist!");
                 Client.watchlist.Add(fid);
                 btnWL.Foreground = BaseColor.redBrush;
+
+                DocumentReference wlRef = main.db.Collection("Films").Document(fid);
+                DocumentSnapshot wlSS = await wlRef.GetSnapshotAsync();
+                DataFilm dataFilm = wlSS.ConvertTo<DataFilm>();
+                wl.list.Add(new ComListFilm(dataFilm, wlSS.Id));
+                wl.Total++;
             }
             else
             {
                 await userRef.UpdateAsync("watchlist", FieldValue.ArrayRemove(fid));
-                MessageBox.Show("Đã xóa phim khỏi Watch List của bạn");
+                MessageBox.Show("Removed from watchlist");
                 Client.watchlist.Remove(fid);
                 btnWL.Foreground = Brushes.White;
+
+                wl.list.RemoveAll(a => a.fID == fid);
+                wl.Total--;
             }
+            
         }
     }
 }
