@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Google.Cloud.Firestore;
-
+using ReviewYourFilms.Models;
 
 namespace ReviewYourFilms
 {
@@ -16,12 +16,28 @@ namespace ReviewYourFilms
     /// </summary>
     public partial class HomePage : Page
     {
+        MainWindow main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+
         private FirestoreDb db;
+        DataFilm dataFilm;
+        string fID;
         public HomePage()
         {
             InitializeComponent();
             db = AccountManager.Instance().LoadDB();
             LoadTop10();
+            LoadBanner();
+        }
+        private async void LoadBanner()
+        {
+            /*Query query = db.Collection("Banners");
+            QuerySnapshot qSS = await query.GetSnapshotAsync();
+            DataBanner bnr = qSS[0].ConvertTo<DataBanner>();
+            imgBanner.ImageSource = bnr.GetImage();
+            DocumentReference filmRef = db.Collection("Films").Document(qSS[0].Id);
+            DocumentSnapshot filmSS = await filmRef.GetSnapshotAsync();
+            dataFilm = filmSS.ConvertTo<DataFilm>();
+            fID = filmSS.Id;*/
         }
 
         private async void LoadTop10()
@@ -39,5 +55,9 @@ namespace ReviewYourFilms
             stackRowF.Children.Add(rowt10);
         }
 
+        private void txtBanner_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            main.NavHost.Content = new DetailFilm(dataFilm, fID);
+        }
     }
 }

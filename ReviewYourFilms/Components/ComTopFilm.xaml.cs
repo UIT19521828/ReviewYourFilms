@@ -34,6 +34,8 @@ namespace ReviewYourFilms.Components
             this.data = data;
             this.fID = fID;
             this.index = index;
+
+            LoadTopFilm();
         }
 
         private void LoadTopFilm()
@@ -82,7 +84,7 @@ namespace ReviewYourFilms.Components
 
         private void Title_MouseClick(object sender, MouseButtonEventArgs e)
         {
-
+            main.NavHost.Content = new DetailFilm(data, fID);
         }
     }
 }

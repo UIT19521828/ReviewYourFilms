@@ -11,7 +11,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="37*"/>
         </Grid.RowDefinitions>
         <Grid  Background="#202020" Grid.Row="0">
@@ -25,17 +25,21 @@
                 Background="#202020">
             <StackPanel Margin="15 0 0 0" Orientation="Horizontal">
                 <Label Style="{StaticResource labelDF}" HorizontalAlignment="Left"
-                    Content="total item: "/>
+                    Content="total item: " FontSize="16" Width="Auto"/>
+                <TextBox Style="{StaticResource textBoxNoCnH}" VerticalAlignment="Center"
+                         Text="0" FontSize="18" Margin="0 2 0 0"
+                         x:Name="txtTotalItem"/>
                 <Label Style="{StaticResource labelDF}" HorizontalAlignment="Left" Margin="15 0 0 0"
-                    Content="average rating: "/>
+                    Content="average rating: " FontSize="16" Width="auto"/>
+                <TextBox Style="{StaticResource textBoxNoCnH}" VerticalAlignment="Center"
+                         Text="0%" FontSize="18" Margin="0 2 0 0"
+                         x:Name="txtPercent"/>
             </StackPanel>
         </Border>
         
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2"
                       HorizontalScrollBarVisibility="Disabled">
-            <WrapPanel Margin="20 10 0 0">
-
-            </WrapPanel>
+            <WrapPanel Margin="20 10 0 0" x:Name="panelWL"/>
         </ScrollViewer>
     </Grid>
 </Page>

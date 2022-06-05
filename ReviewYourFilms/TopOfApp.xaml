@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:ReviewYourFilms"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1350"
-      Title="TopOfApp">
+      Title="TopOfApp" Loaded="Page_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -28,12 +28,14 @@
             </Border>
             <StackPanel  Background="#202020">
                 <RadioButton Style="{StaticResource menuButton}" Height="25"
-                             Margin="15 20 7 0">
+                             Margin="15 20 7 0" x:Name="btn100Movie"
+                             Click="btn100Movie_Click">
                     <TextBlock Text="Top 100 Movies" 
                      Style="{StaticResource menuButtonText}" Foreground="#6691B0"/>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}" Height="25"
-                             Margin="15 2 7 0">
+                             Margin="15 2 7 0" x:Name="btn100TV"
+                             Click="btn100TV_Click">
                     <TextBlock Text="Top 100 TV Series" 
                      Style="{StaticResource menuButtonText}" Foreground="#6691B0"/>
                 </RadioButton>
@@ -46,13 +48,13 @@
                 </Grid.RowDefinitions>
                 <Label Foreground="White" HorizontalAlignment="Left" Width="Auto"
                        Margin="15,0,0,0" Content="Top 100 Movies" VerticalAlignment="Center"
-                       FontSize="20" FontWeight="SemiBold"/>
+                       FontSize="20" FontWeight="SemiBold" x:Name="chartName"/>
                 <Grid Grid.Row="1">
 
                 </Grid>
                 <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled"
                               VerticalScrollBarVisibility="Auto">
-                    <WrapPanel/>
+                    <WrapPanel x:Name="panelTop"/>
                 </ScrollViewer>
                 
             </Grid>

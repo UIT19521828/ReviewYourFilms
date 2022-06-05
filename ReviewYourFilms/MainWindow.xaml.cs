@@ -103,17 +103,17 @@ namespace ReviewYourFilms
 
         private void Top100_Click(object sender, RoutedEventArgs e)
         {
-
+            NavHost.Content = topOfApp;
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-
+            NavHost.Content = searchPage;
         }
 
         private void Followed_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }

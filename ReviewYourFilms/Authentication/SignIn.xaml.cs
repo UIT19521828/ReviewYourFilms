@@ -25,6 +25,7 @@ namespace ReviewYourFilms.Authentication
         public SignIn()
         {
             InitializeComponent();
+            txtEmail.Focus();
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -32,13 +33,13 @@ namespace ReviewYourFilms.Authentication
             gridMain.IsEnabled = false;
             if (string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPass.Password))
             {
-                MessageBox.Show("Xin điền thông tin đăng nhập!");
+                MessageBox.Show("Input your information!");
             }
             else
             {
                 if (await AccountManager.Instance().SignIn(txtEmail.Text, txtPass.Password))
                 {
-                    MessageBox.Show("Đăng nhập thành công!");
+                    MessageBox.Show("Sign in success!");
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();   
                     authW.Hide();
@@ -50,6 +51,22 @@ namespace ReviewYourFilms.Authentication
         private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             authW.frameAuth.Content = new SignUp();
+        }
+
+        private void txtEmail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                txtPass.Focus();
+            }
+        }
+
+        private void txtPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Button_Click(sender, e);
+            }
         }
     }
 }

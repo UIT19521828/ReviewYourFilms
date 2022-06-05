@@ -29,37 +29,69 @@ namespace ReviewYourFilms.Authentication
 
         private async void SignUp_Click(object sender, RoutedEventArgs e)
         {
+            gridSU.IsEnabled = false;
             if (string.IsNullOrEmpty(txtNickname.Text) ||
                 string.IsNullOrEmpty(txtPass.Password) ||
                 string.IsNullOrEmpty(txtEmail.Text))
             {
-                MessageBox.Show("Xin điền thông tin đăng nhập!");
+                MessageBox.Show("Input your information!");
             }
             else
             {
                 if (txtPass.Password != txtRePass.Password)
                 {
-                    MessageBox.Show("Mật khẩu không trùng khớp");
+                    MessageBox.Show("Repeat password is not correct!");
                 }
                 else
                 {
 
                     if (await AccountManager.Instance().SignUp(txtEmail.Text, txtPass.Password, txtNickname.Text))
                     {
-                        MessageBox.Show("Tạo tài khoản thành công!");
+                        MessageBox.Show("Success Create Account!");
                         authW.frameAuth.GoBack();
                     }
                     else
                     {
-                        MessageBox.Show("Không đăng ký được!!!");
+                        MessageBox.Show("Can't Sign up!!!");
                     }
                 }
             }
+            gridSU.IsEnabled = true;
         }
+
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
             authW.frameAuth.GoBack();
+        }
+
+        private void txtEmail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                txtNickname.Focus();
+            }
+        }
+
+        private void txtNickname_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                txtPass.Focus();
+            }
+        }
+
+        private void txtPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                txtRePass.Focus();
+            }
+        }
+
+        private void txtRePass_KeyDown(object sender, KeyEventArgs e)
+        {
+            SignUp_Click(sender, e);
         }
     }
 }

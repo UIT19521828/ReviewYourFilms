@@ -54,7 +54,7 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="450"/>
+                <ColumnDefinition Width="550"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="15 0 0 0">
@@ -63,7 +63,7 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="60"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal" Margin="19 0 0 0">
+                    <StackPanel Orientation="Horizontal" Margin="22 0 0 0">
                         <Border Width="140" CornerRadius="15" Background="#C38FFF"
                                 HorizontalAlignment="Left" Margin="10,10,0,10"
                                 x:Name="btnWrite">
@@ -86,7 +86,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <fa:ImageAwesome Icon="Edit" Width="20" Height="20"
                                      Foreground="Black" Margin="0 0 5 0"/>
-                                    <TextBlock Text="Write Review" Foreground="Black"/>
+                                    <TextBlock Text="Edit Review" Foreground="Black"/>
                                 </StackPanel>
                             </Button>
                         </Border>
@@ -114,11 +114,11 @@
                     </Button>
                 </Grid>
                 <Border Style="{StaticResource borderRainbow}" BorderThickness="0.5"
-                        Width="375" CornerRadius="15" Margin="-3 0 0 0">
+                        Width="470" CornerRadius="15" Margin="-3 0 0 0">
                     <StackPanel Margin="7">
                         <TextBox ma:HintAssist.Hint="Your Review title" IsReadOnly="True"
                                  Foreground="White" FontSize="18" FontWeight="Bold"
-                                 x:Name="txtRvTitle"/>
+                                 x:Name="txtRvTitle" Margin="5 0 0 0"/>
                         <ma:RatingBar Max="10" Value="0" Margin="0 0 0 5"
                                       x:Name="ratingBox" IsReadOnly="True">
                             <ma:RatingBar.Foreground>
@@ -136,10 +136,10 @@
                                Visibility="Collapsed" x:Name="txtRatio"/>
                         <Border Width="150" CornerRadius="15" Background="#C61439"
                                 HorizontalAlignment="Right" Margin="10,10,0,0"
-                                Visibility="Collapsed">
+                                Visibility="Collapsed" x:Name="btnDelete">
                             <Button Background="Transparent" BorderThickness="0"
                                     HorizontalAlignment="Left" Cursor="Hand"
-                                    Click="Delete_Click" x:Name="btnDelete">
+                                    Click="Delete_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <fa:ImageAwesome Icon="TrashOutline" Width="20" Height="20"
                                      Foreground="White" Margin="0 0 5 0"/>

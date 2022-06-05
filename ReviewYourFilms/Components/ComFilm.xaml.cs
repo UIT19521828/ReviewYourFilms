@@ -38,6 +38,7 @@ namespace ReviewYourFilms
             int x = 0;
             if (data.numRate != 0) x = data.totalPoint / data.numRate * 10;
 
+            
             txtPercent.Text = x.ToString();
             txtTitle.Text = data.name;
             if (x < 70 && x > 40)

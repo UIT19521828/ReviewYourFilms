@@ -35,6 +35,9 @@ namespace ReviewYourFilms.Components
             InitializeComponent();
             this.data = data;
             this.fID = fID;
+
+            LoadWL_Film();
+            LoadClientRate();
         }
 
         private void LoadWL_Film()
@@ -49,6 +52,8 @@ namespace ReviewYourFilms.Components
             {
                 duration += " (" + data.eps + "eps)";
             }
+            txtTime.Text = duration + "";
+            txtYear.Text = data.year + "";
             txtGenre.Text = data.genre;
             if (x < 70 && x > 40)
             {

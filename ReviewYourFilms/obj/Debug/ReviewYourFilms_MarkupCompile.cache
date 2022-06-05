@@ -11,10 +11,10 @@ false
 DEBUG;TRACE
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\App.xaml
 17-1754490716
-4-483059426
-24261223182
+1128492545958
+24349354591
 164232401187
 Components\ComFilm.xaml;Components\ComListFilm.xaml;Components\ComReview.xaml;Components\ComTopFilm.xaml;Authentication\SignIn.xaml;AuthWindow.xaml;Components\RowOfFilm.xaml;DetailFilm.xaml;HomePage.xaml;MainWindow.xaml;Resources\ComponentStyles.xaml;Resources\DefaultStyles.xaml;ReviewPage.xaml;SearchPage.xaml;Authentication\SignUp.xaml;TopOfApp.xaml;WatchList.xaml;
 
-True
+False
 

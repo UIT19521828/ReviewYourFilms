@@ -7,8 +7,8 @@
              xmlns:ma="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:local="clr-namespace:ReviewYourFilms.Components"
              mc:Ignorable="d" 
-             d:DesignWidth="800"
-             Height="225">
+             d:DesignWidth="800" MinWidth="800"
+             Height="225" Margin="15">
     <Border CornerRadius="12" BorderThickness="0.3" BorderBrush="#A3A6AA">
         <Grid>
             <Grid.ColumnDefinitions>
