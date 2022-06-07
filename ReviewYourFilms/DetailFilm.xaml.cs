@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using LibVLCSharp.Shared;
 using Google.Cloud.Firestore;
 using ReviewYourFilms.Components;
@@ -80,6 +77,7 @@ namespace ReviewYourFilms
             txtTitle.Text = film.name;
             txtYear.Text = film.year +"";            
             lbAvgRate.Content = x + "/10";
+            if (Client.watchlist.Contains(fid)) btnWL.Foreground = BaseColor.redBrush;
 
             imgPoster.ImageSource = film.GetImage();                     
             mediaPlayer.Play(new Media(lib, new Uri(film.trailer)));
@@ -97,6 +95,7 @@ namespace ReviewYourFilms
             {
                 CreateButtonGenre(item);
             }
+            
         }
         private async void LoadTopReview()
         {
@@ -109,7 +108,7 @@ namespace ReviewYourFilms
             {
                 lbTempReview.Visibility = Visibility.Collapsed;
                 DataReview dataReview = rvSS[0].ConvertTo<DataReview>();
-                ComReview topRv = new ComReview(dataReview, rvSS[0].Id);
+                ComReview topRv = new ComReview(dataReview, rvSS[0].Id, false);
                 topRv.HorizontalAlignment = HorizontalAlignment.Left;
 
                 panelReview.Children.Add(topRv);
@@ -130,13 +129,8 @@ namespace ReviewYourFilms
             }
         }      
         private void NavBack_Click(object sender, RoutedEventArgs e)
-        {
-            if (mediaPlayer.IsPlaying)
-            {
-                mediaPlayer.Pause();
-                iconPlay.Kind = MaterialDesignThemes.Wpf.PackIconKind.PlayCircleOutline;
-            }
-            main.NavHost.GoBack();          
+        {            
+            main.NavHost.GoBack();
         }
         private void OpenReview_Click(object sender, RoutedEventArgs e)
         {
@@ -168,12 +162,20 @@ namespace ReviewYourFilms
                 await userRef.UpdateAsync("watchlist", FieldValue.ArrayRemove(fid));
                 MessageBox.Show("Removed from watchlist");
                 Client.watchlist.Remove(fid);
-                btnWL.Foreground = Brushes.White;
+                btnWL.Foreground = BaseColor.defaultBrush;
 
                 wl.list.RemoveAll(a => a.fID == fid);
                 wl.Total--;
             }
             
+        }
+        protected virtual void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            if (mediaPlayer.IsPlaying)
+            {
+                mediaPlayer.Pause();
+                iconPlay.Kind = MaterialDesignThemes.Wpf.PackIconKind.PlayCircleOutline;
+            }
         }
     }
 }

@@ -16,9 +16,7 @@ namespace ReviewYourFilms.Models
 
         public BitmapImage GetImage()
         {
-            if (!string.IsNullOrEmpty(bannerURL))
-                return new BitmapImage(new Uri(bannerURL));
-            return null;
+            return new BitmapImage(new Uri(bannerURL));
         }
     }
 }

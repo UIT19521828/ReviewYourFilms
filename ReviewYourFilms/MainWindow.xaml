@@ -6,10 +6,9 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:ReviewYourFilms"       
         mc:Ignorable="d"
-        Background="Transparent"
-        AllowsTransparency="True"
-        Title="MainWindow" Height="600" Width="1350" WindowStyle="None"
-        Loaded="MainWindow_Loaded">
+        Background="Transparent" MouseDown="Window_MouseDown"
+        AllowsTransparency="True" Closed="Window_Closed"
+        Title="MainWindow" Height="600" Width="1350" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -68,8 +67,7 @@
         </Style>
     </Window.Resources>
     <Border x:Name="mainBorder" BorderThickness="0.5" BorderBrush="#A3A6AA"
-            CornerRadius="10"
-            Background="#202020">
+            CornerRadius="10" Background="#202020">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -119,8 +117,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="250"/>
                     <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Click="OpenMenuBoard"
                         fa:Awesome.Content="Bars"         
@@ -142,22 +140,29 @@
                              TextAlignment="Left"/>
                     </Border>
                 </StackPanel>
-                <Ellipse Grid.Column="2" 
-                       HorizontalAlignment="Center" Width="40" Height="40" Margin="0,2,0,3">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="Images\user.png"/>
-                    </Ellipse.Fill>
-                </Ellipse>
-                <Button Grid.Column="3"
-                        Click="OpenAccount"
-                        Cursor="Hand"
-                        fa:Awesome.Content="CaretDown"                         
-                        Style="{StaticResource defaultButton}"
-                        BorderThickness="0"
-                        FontSize="20"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center" Height="22" Width="14">
-                </Button>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Ellipse 
+                       HorizontalAlignment="Center" Width="40" Height="40" >
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="Images\user.png" x:Name="imgClient"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBox x:Name="txtUserN" Text="Client" Foreground="#E7E9EA"
+                             Style="{StaticResource textBoxNoCnH}" VerticalAlignment="Center"
+                             FontWeight="DemiBold" FontSize="25" Margin="5 0 10 0"/>
+                </StackPanel>
+                <Grid Grid.Column="3">
+                    <Ellipse Height="40" Fill="#2A2C2E"/>
+                    <Button Click="OpenAccount" x:Name="btnSetting"
+                            Cursor="Hand"
+                            fa:Awesome.Content="CaretDown"                         
+                            Style="{StaticResource defaultButton}"
+                            BorderThickness="0"
+                            FontSize="25" Margin="3 3 5 0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center" Height="35" Width="35">
+                    </Button>
+                </Grid>
             </Grid>
             <Border x:Name="secondBorder" Background="#181818"
                     Grid.Row="2" CornerRadius="0 0 10 10">
@@ -224,6 +229,32 @@
                             </RadioButton>
 
                         </StackPanel>
+                    </Border>
+                    <Border HorizontalAlignment="Right" Margin="0 3 10 0"
+                            x:Name="settingBoard" Width="200"
+                            BorderThickness="0.3" BorderBrush="Silver" CornerRadius="12"
+                            VerticalAlignment="Top" Background="#202020">
+                        <StackPanel>
+                            <Border Height="40" Margin="10 3 10 5" Cursor="Hand"
+                                    x:Name="btnUserInfor" MouseDown="btnUserInfor_MouseDown">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:ImageAwesome Icon="Gear" Width="30" Height="30"
+                                                     Foreground="#E7E9EA" Margin="15 0 15 0"/>
+                                    <TextBlock Text="User Profile" FontSize="18" Foreground="#E7E9EA"
+                                               VerticalAlignment="Center" FontWeight="DemiBold"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Height="40" Margin="10 0 10 0" Cursor="Hand"
+                                    x:Name="btnSignOut" MouseDown="btnSignOut_MouseDown">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:ImageAwesome Icon="SignOut" Width="30" Height="30"
+                                                     Foreground="#E7E9EA" Margin="15 0 15 0"/>
+                                    <TextBlock Text="Sign Out" FontSize="18" Foreground="#E7E9EA"
+                                               VerticalAlignment="Center" FontWeight="DemiBold"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                        
                     </Border>
                 </Grid>
 

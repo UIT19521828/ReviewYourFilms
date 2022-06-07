@@ -7,7 +7,7 @@
              xmlns:ma="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:local="clr-namespace:ReviewYourFilms.Components"
              mc:Ignorable="d" 
-             d:DesignWidth="800" MinWidth="900"
+             d:DesignWidth="800" Width="1200"
              Height="225" Margin="15">
     <Border CornerRadius="12" BorderThickness="0.3" BorderBrush="#A3A6AA">
         <Grid>
@@ -84,7 +84,7 @@
                     
                 </Grid>
                 <TextBox TextWrapping="Wrap" Style="{StaticResource textBoxNoCnH}"
-                         Text="Test" Margin="15" Grid.Row="1"
+                         Margin="15 15 15 5" Grid.Row="1" Text="overview"
                          x:Name="txtDescript" FontSize="18" FontWeight="Regular"/>
                 <StackPanel Grid.Row="2" VerticalAlignment="Center" Margin="15 0 0 0"
                             Orientation="Horizontal">
@@ -100,7 +100,7 @@
                                  Foreground="#A3A6AA" x:Name="tempRate"/>
                     <TextBox Style="{StaticResource textBoxNoCnH}"
                              Margin="0 2 20 0" Foreground="#A3A6AA"
-                             Text="Your rating" FontWeight="Regular" VerticalAlignment="Center"
+                             Text="Your rating" FontWeight="DemiBold" VerticalAlignment="Center"
                              FontSize="17"/>
                     <Button Style="{StaticResource styleless}" Background="Transparent"
                             Cursor="Hand" BorderThickness="0" Click="RemoveWL_Click">
@@ -110,7 +110,7 @@
                     
                     <TextBox Style="{StaticResource textBoxNoCnH}"
                              Margin="0 2 0 0" Foreground="#A3A6AA"
-                             Text="Remove" FontWeight="Regular" VerticalAlignment="Center"
+                             Text="Remove" FontWeight="DemiBold" VerticalAlignment="Center"
                              FontSize="17"/>
                 </StackPanel>
             </Grid>

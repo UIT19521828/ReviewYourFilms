@@ -21,18 +21,24 @@ namespace ReviewYourFilms.Components
     /// </summary>
     public partial class ComReview : UserControl
     {
+        MainWindow main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+
+
         private DataReview data;
         private FirestoreDb db = AccountManager.Instance().LoadDB();
         private string rID;
         private int like, dis;
         private DataUser user;
         private DocumentReference reviewRef;
+        private bool needTitle;
+        private DataFilm film;
 
-        public ComReview(DataReview data, string rID)
+        public ComReview(DataReview data, string rID, bool need)
         {
             InitializeComponent();
             this.data = data;
             this.rID = rID;
+            this.needTitle = need;
             reviewRef = db.Collection("Reviews").Document(rID);
             LoadReview();
         }
@@ -85,6 +91,14 @@ namespace ReviewYourFilms.Components
             DocumentSnapshot userSS = await userRef.GetSnapshotAsync();
             user = userSS.ConvertTo<DataUser>();
 
+            if (needTitle)
+            {
+                column1.Width = new GridLength(0);
+                DocumentReference filmRef = db.Collection("Films").Document(data.film);
+                DocumentSnapshot filmSS = await filmRef.GetSnapshotAsync();
+                film = filmSS.ConvertTo<DataFilm>();
+                txtFilmTitle.Text = film.name;
+            }
             if(user.imageURL != "") imgReviewer.ImageSource = user.GetImage();
             txtTitle.Text = data.title;
             txtScore.Content = data.score;
@@ -162,6 +176,11 @@ namespace ReviewYourFilms.Components
             await reviewRef.UpdateAsync("isDis", FieldValue.ArrayUnion(Client.uid));
             await reviewRef.UpdateAsync("countDis", FieldValue.Increment(1));           
             SetDis(true);
+        }
+
+        private void txtFilmTitle_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            main.NavHost.Content = new DetailFilm(film, data.film);
         }
 
         public void SetRtf(string document)

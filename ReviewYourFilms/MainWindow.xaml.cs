@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Google.Cloud.Firestore;
-
+using Microsoft.Win32;
 
 namespace ReviewYourFilms
 {
@@ -36,6 +36,13 @@ namespace ReviewYourFilms
             db = AccountManager.Instance().LoadDB();
             this.MaxHeight = SystemParameters.WorkArea.Height + 7;
             this.MaxWidth = SystemParameters.WorkArea.Width + 7;
+            ChangeStateWind();
+            menuBoard.Visibility = Visibility.Collapsed;
+            settingBoard.Visibility = Visibility.Collapsed;
+            btnHomeP.IsChecked = true;
+            NavHost.Content = homePage;
+            txtUserN.Text = Client.userName;
+            imgClient.ImageSource = new BitmapImage(new Uri(Client.imageURL));
         }       
 
         private void BorderMouseDown(object sender, MouseButtonEventArgs e)
@@ -70,10 +77,8 @@ namespace ReviewYourFilms
 
         private void ButtonX_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult rs = (
-                System.Windows.Forms.DialogResult)MessageBox.Show("Do you want to Exit App?"
-                , "Exit App?", MessageBoxButton.YesNo);
-            if (rs == System.Windows.Forms.DialogResult.Yes)
+            MessageBoxResult rs = MessageBox.Show("Do you want to Exit App?", "Exit App?", MessageBoxButton.YesNo);
+            if (rs == MessageBoxResult.Yes)
                 Environment.Exit(0);
         }
 
@@ -85,39 +90,68 @@ namespace ReviewYourFilms
         }
         private void OpenAccount(object sender, RoutedEventArgs e)
         {
-
+            if (settingBoard.Visibility == Visibility.Visible)
+            {
+                settingBoard.Visibility = Visibility.Collapsed;
+                btnSetting.Foreground = BaseColor.defaultBrush;
+            }
+            else 
+            { 
+                settingBoard.Visibility = Visibility.Visible;
+                btnSetting.Foreground = BaseColor.blueBrush;
+            }
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            ChangeStateWind();
-            menuBoard.Visibility = Visibility.Collapsed;
-            btnHomeP.IsChecked = true;
-            NavHost.Content = homePage;           
-        }
         private void HomePage_Click(object sender, RoutedEventArgs e)
         {
             NavHost.Content = homePage;
+            menuBoard.Visibility = Visibility.Collapsed;
         }
 
         private void WatchL_Click(object sender, RoutedEventArgs e)
         {
             NavHost.Content = watchList;
+            menuBoard.Visibility = Visibility.Collapsed;
         }
 
         private void Top100_Click(object sender, RoutedEventArgs e)
         {
             NavHost.Content = topOfApp;
+            menuBoard.Visibility = Visibility.Collapsed;
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             NavHost.Content = searchPage;
+            menuBoard.Visibility = Visibility.Collapsed;
         }
 
         private void Followed_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            menuBoard.Visibility = Visibility.Collapsed;
+            settingBoard.Visibility = Visibility.Collapsed;
+            btnSetting.Foreground = BaseColor.defaultBrush;
+        }
+
+        private void btnSignOut_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void btnUserInfor_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ProfileUser profile = new ProfileUser(Client.uid, this);
+            profile.Show();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

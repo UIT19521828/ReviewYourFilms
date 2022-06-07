@@ -16,7 +16,7 @@ namespace ReviewYourFilms
         public static FirebaseAuthProvider authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCHftKWgqCi8mzxcBrREek-qKoJVw9mxfs"));
         public FirebaseAuthLink link;
         public static bool isSignOut = false;
-        public static FirestoreDb db;
+        public static FirestoreDb db = null;
 
         public static AccountManager Instance()
         {
@@ -25,10 +25,13 @@ namespace ReviewYourFilms
         }
         public FirestoreDb LoadDB()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + @"filmreview.json";
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-            FirestoreDb fireDB = FirestoreDb.Create("filmreview-de9c4");
-            return fireDB;
+            if(db == null)
+            {
+                string path = AppDomain.CurrentDomain.BaseDirectory + @"filmreview.json";
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                db = FirestoreDb.Create("filmreview-de9c4");
+            }           
+            return db;
         }
         public async Task<bool> Refreshable()
         {
@@ -65,7 +68,8 @@ namespace ReviewYourFilms
                     new FirebaseOptions
                     {
                         AuthTokenAsyncFactory = () => Task.FromResult(link.FirebaseToken),
-                    });
+                    }
+                );
                 /*if(link.User.IsEmailVerified == false)
                 {
                     DialogResult rs = MessageBox.Show("Bạn chưa xác nhận email. Bạn có muốn gửi lại email xác nhận không", 
@@ -100,22 +104,7 @@ namespace ReviewYourFilms
             }
             catch
             {
-                MessageBox.Show("Đăng nhập không thành công!");
-                return false;
-            }
-        }
-        public bool SignOut()
-        {
-            try
-            {
-                Client.email = link.User.Email;
-                Client.token = "";
-                Client.refreshToken = "";
-                isSignOut = true;
-                return true;
-            }
-            catch
-            {
+                MessageBox.Show("Fail to Sign In!");
                 return false;
             }
         }
@@ -152,6 +141,33 @@ namespace ReviewYourFilms
             catch
             {
                 return false;
+            }
+        }    
+        public bool SignOut()
+        {
+            try
+            {
+                Client.email = link.User.Email;
+                Client.token = "";
+                Client.refreshToken = "";
+                isSignOut = true;
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public async void ChangeEmail(string email)
+        {
+            db = LoadDB();
+            try
+            {
+                await authProvider.ChangeUserEmail(Client.token, email);      
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
         private async void AuthLink_FbAuthRefreshAsync(object sender, FirebaseAuthEventArgs e)

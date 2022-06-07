@@ -36,7 +36,7 @@
                                              Foreground="White"/>
                         </Button>
                         <TextBox x:Name="txtTitle" FontWeight="SemiBold"
-                             Grid.Column="0" Style="{StaticResource textboxNonCarret}"
+                             Grid.Column="0" Style="{StaticResource textBoxNoCnH}"
                              Text="Title" FontSize="35" 
                              VerticalAlignment="Center" FontFamily="Arial Rounded MT Bold"/>
                     </StackPanel>

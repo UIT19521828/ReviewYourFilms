@@ -43,14 +43,17 @@ namespace ReviewYourFilms.Components
             int x = 0;
             if (data.numRate != 0) x = data.totalPoint / data.numRate * 10;
 
-            txtPercent.Content = x.ToString();
+            txtPercent.Text = x.ToString();
             txtTitle.Text = index + ". " + data.name;
             string duration = data.time + "min";
             if (data.genre == "TV series")
             {
                 duration += " (" + data.eps + "eps)";
             }
+            txtTime.Text = duration;
             txtGenre.Text = data.genre;
+            txtYear.Text = data.year + "";
+            txtDir.Text = data.director;
             if (x < 70 && x > 40)
             {
                 pieHas.Fill = BaseColor.midHas;

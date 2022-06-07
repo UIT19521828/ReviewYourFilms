@@ -16,16 +16,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ReviewYourFilms
+namespace ReviewYourFilms.Components
 {
-    public partial class ConFilm : UserControl
+    public partial class ComFilm : UserControl
     {
         MainWindow main  = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 
         private DataFilm data;
         private string fid;
+        private BitmapImage bit;
 
-        public ConFilm(DataFilm film, string fid)
+        public ComFilm(DataFilm film, string fid)
         {
             InitializeComponent();  
             this.fid = fid;
@@ -53,7 +54,8 @@ namespace ReviewYourFilms
             }
             pieHas.Values = new ChartValues<ObservableValue> { new ObservableValue(x)};
             pieNo.Values = new ChartValues<ObservableValue> { new ObservableValue(100-x) };
-            imgPoster.ImageSource = data.GetImage();
+            bit = data.GetImage();
+            imgPoster.ImageSource = bit;
         }
 
         private void NewDetail_Click(object sender, RoutedEventArgs e)

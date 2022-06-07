@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\App.xaml
-1885748347
+211328083074
 4-483059426
-261340542161
+291147923862
 165-728023608
-Components\ComBanner.xaml;Components\ComFilm.xaml;Components\ComListFilm.xaml;Components\ComReview.xaml;Components\ComTopFilm.xaml;Authentication\SignIn.xaml;AuthWindow.xaml;Components\RowOfFilm.xaml;DetailFilm.xaml;HomePage.xaml;MainWindow.xaml;Resources\ComponentStyles.xaml;Resources\DefaultStyles.xaml;ReviewPage.xaml;SearchPage.xaml;Authentication\SignUp.xaml;TopOfApp.xaml;WatchList.xaml;
+Authentication\ChangeUserEmail.xaml;Authentication\LoadingScreen.xaml;Components\ComBanner.xaml;Components\ComFilm.xaml;Components\ComListFilm.xaml;Components\ComReview.xaml;Components\ComTopFilm.xaml;Authentication\SignIn.xaml;AuthWindow.xaml;ProfileUser.xaml;Components\RowOfFilm.xaml;DetailFilm.xaml;HomePage.xaml;MainWindow.xaml;Resources\ComponentStyles.xaml;Resources\DefaultStyles.xaml;ReviewPage.xaml;SearchPage.xaml;Authentication\SignUp.xaml;TopOfApp.xaml;WatchList.xaml;
 
 True
 

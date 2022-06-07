@@ -24,11 +24,15 @@ namespace ReviewYourFilms
         [FirestoreProperty]
         public List<string> followed { get; set; }
 
+        private BitmapImage bit = null;
+
         public BitmapImage GetImage()
         {
-            if (!string.IsNullOrEmpty(imageURL))
-                return new BitmapImage(new Uri(imageURL));
-            return null;
+            if(bit == null)
+            {
+                bit = new BitmapImage(new Uri(imageURL));
+            }
+            return bit; 
         }
     }
 }

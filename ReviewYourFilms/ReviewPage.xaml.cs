@@ -5,15 +5,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
+using Microsoft.Win32;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ReviewYourFilms
 {
@@ -111,7 +108,7 @@ namespace ReviewYourFilms
             foreach (DocumentSnapshot docR in qSS)
             {
                 DataReview infoReview = docR.ConvertTo<DataReview>();
-                ComReview view = new ComReview(infoReview, docR.Id);
+                ComReview view = new ComReview(infoReview, docR.Id, false);
                 panelAllRv.Children.Add(view);
             }
         }
@@ -143,6 +140,7 @@ namespace ReviewYourFilms
         {
             btnWrite.Visibility = Visibility.Collapsed;
             btnUpload.Visibility = Visibility.Visible;
+            btnCancel.Visibility = Visibility.Visible;
             txtRvTitle.IsReadOnly = false;
             rtbContent.IsReadOnly = false;
             ratingBox.IsReadOnly = false;
@@ -152,6 +150,7 @@ namespace ReviewYourFilms
         {
             btnEdit.Visibility = Visibility.Collapsed;
             btnUpload.Visibility = Visibility.Visible;
+            btnCancel.Visibility = Visibility.Visible;
             txtRvTitle.IsReadOnly = false;
             rtbContent.IsReadOnly = false;
             ratingBox.IsReadOnly = false;
@@ -159,21 +158,28 @@ namespace ReviewYourFilms
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            LoadTemp();
-            btnCancel.Visibility = Visibility.Collapsed;
-            if (hasReview) btnEdit.Visibility = Visibility.Visible;
-            else btnWrite.Visibility = Visibility.Visible;
+            MessageBoxResult rs = MessageBox.Show("Do you want to cancel this review?!"
+                   , "Cancel reviewing?", MessageBoxButton.YesNo);
+            if (rs == MessageBoxResult.Yes)
+            {
+                LoadTemp();
+                btnCancel.Visibility = Visibility.Collapsed;
+                btnUpload.Visibility = Visibility.Collapsed;
+                if (hasReview) btnEdit.Visibility = Visibility.Visible;
+                else btnWrite.Visibility = Visibility.Visible;
+            }
         }
 
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult rs = 
-                (System.Windows.Forms.DialogResult)MessageBox.Show("Do you want to delete your review?!"
+            MessageBoxResult rs = MessageBox.Show("Do you want to delete your review?!"
                 ,"Delete Review", MessageBoxButton.YesNo);
-            if (rs == System.Windows.Forms.DialogResult.Yes)
+            if (rs == MessageBoxResult.Yes)
             {
                 await reviewRef.DeleteAsync();
                 btnDelete.Visibility = Visibility.Collapsed;
+                btnEdit.Visibility = Visibility.Collapsed;
+                btnWrite.Visibility = Visibility.Visible;
                 ChangeAvegRating(-tempRv.score, -1);
                 hasReview = false;
                 reviewRef = null;
@@ -190,10 +196,9 @@ namespace ReviewYourFilms
 
         private async void UpLoad_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult rs = 
-                (System.Windows.Forms.DialogResult)MessageBox.Show("Upload this review?"
+            MessageBoxResult rs = MessageBox.Show("Upload this review?"
                 , "upload Review", MessageBoxButton.YesNo);
-            if (rs == System.Windows.Forms.DialogResult.Yes)
+            if (rs == MessageBoxResult.Yes)
             {
                 if (hasReview)
                 {
@@ -223,7 +228,7 @@ namespace ReviewYourFilms
                 };
                     tempRv = new DataReview(GetRtf(), fID, ratingBox.Value,
                                     txtRvTitle.Text, Client.uid, array, array, 0, 0);
-                    await db.Collection("Reviews").AddAsync(add);
+                    reviewRef = await db.Collection("Reviews").AddAsync(add);
                     ChangeAvegRating(ratingBox.Value, 1);
                     hasReview = true;
                     btnDelete.Visibility = Visibility.Visible;
@@ -246,6 +251,8 @@ namespace ReviewYourFilms
                 if (filmData.numRate != 0) average = (double)filmData.totalPoint / filmData.numRate;
                 average = Math.Round(average, 4);
                 await fRef.UpdateAsync("rating", average);
+
+                LoadAllReview();
             }          
         }
 
@@ -266,6 +273,30 @@ namespace ReviewYourFilms
                 nowPage--;
                 txtNowP.Text = (nowPage - 1) + "";
                 LoadAllReview();
+            }
+        }
+
+        private void txtNowP_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void txtNowP_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if(int.Parse(txtNowP.Text) > maxPage || int.Parse(txtNowP.Text) <= 0)
+                {
+                    MessageBox.Show("Number of Page is wrong!", "Out of bound");
+                    return;
+                }
+                else
+                {
+                    nowPage = int.Parse(txtNowP.Text);
+                    LoadAllReview();
+                    txtNowP.Text = nowPage +"";
+                }
             }
         }
     }
