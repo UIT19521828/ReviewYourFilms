@@ -1,0 +1,19 @@
+﻿<Window x:Class="ReviewYourFilms.Authentication.LoadingScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ReviewYourFilms.Authentication"
+        mc:Ignorable="d" WindowStyle="None" Background="Transparent"
+        Title="LoadingScreen" Height="450" Width="650">
+    <Border CornerRadius="35">
+        <Border.Background>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <MediaElement Source="\Images\LoadingScreen.gif" x:Name="gifLoad"
+                                  MediaEnded="MediaElement_MediaEnded"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Border.Background>
+    </Border>
+</Window>

@@ -36,11 +36,15 @@ namespace ReviewYourFilms
         [FirestoreProperty]
         public string director { get; set; }
 
+        private BitmapImage bit = null;
+
         public BitmapImage GetImage()
         {
-            if(!string.IsNullOrEmpty(poster))
-                return new BitmapImage(new Uri(poster));
-            return null;
+            if(bit == null)
+            {
+                bit = new BitmapImage(new Uri(poster));               
+            }           
+            return bit;
         }
     }
 }

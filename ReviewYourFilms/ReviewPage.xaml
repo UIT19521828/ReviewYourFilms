@@ -167,9 +167,9 @@
                             HorizontalAlignment="Center" Height="30" Width="30"/>
                     <Border Width="40" Height="27" Margin="5 3 5 5" CornerRadius="10"
                             Background="#2B2B38">
-                        <TextBox x:Name="txtNowP"
+                        <TextBox x:Name="txtNowP" PreviewTextInput="txtNowP_PreviewTextInput"
                                  Margin="6 1 5 -1" BorderThickness="0" Text="1" 
-                                 Padding="0 0 0 0"
+                                 Padding="0 0 0 0" KeyDown="txtNowP_KeyDown"
                                  FontSize="17" Foreground="White" Background="Transparent"
                                  TextAlignment="Right"/>
                     </Border>

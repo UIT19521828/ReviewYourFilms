@@ -20,7 +20,7 @@
             <StackPanel Grid.Column="1" Margin="15 8 0 0">
                 <TextBox Style="{StaticResource textboxNonCarret}"
                      Text="i. Title" FontWeight="Bold" Margin="0 15 0 0"
-                     FontSize="30"  x:Name="txtTitle"
+                     FontSize="30"  x:Name="txtTitle" TextWrapping="NoWrap"
                      PreviewMouseDown="Title_MouseClick"/>
                 <StackPanel Orientation="Horizontal" Margin="0 5 0 0"
                                     x:Name="sPanel2">
@@ -55,14 +55,14 @@
                                                Fill="#204529" StrokeThickness="0"/>
                     </lvc:PieChart.Series>
                 </lvc:PieChart>
-                <Label Height="55" Width="55" x:Name="txtPercent"
-                    Background="Transparent"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Padding="15 9 0 0"
-                    FontWeight="Bold"
-                    Content="00"
-                    Foreground="White" FontSize="25"/>
+                <TextBlock Height="55" Width="55" x:Name="txtPercent"
+                            Background="Transparent"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Padding="3.5 10 0 0"
+                            FontWeight="Bold"
+                            Text="00" TextAlignment="Center"
+                            Foreground="White" FontSize="25"/>
             </Grid>
         </Grid>
     </Border>

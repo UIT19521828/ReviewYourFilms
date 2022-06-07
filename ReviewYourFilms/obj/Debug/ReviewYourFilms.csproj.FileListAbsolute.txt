@@ -1268,3 +1268,9 @@ E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Components\ComBanner.
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Components\ComBanner.baml
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\bin\Debug\Gu.Wpf.FlipView.dll
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\bin\Debug\Gu.Wpf.FlipView.xml
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\ProfileUser.g.cs
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\ProfileUser.baml
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Authentication\LoadingScreen.g.cs
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Authentication\LoadingScreen.baml
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Authentication\ChangeUserEmail.g.cs
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Authentication\ChangeUserEmail.baml

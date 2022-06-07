@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:ReviewYourFilms"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="WatchList">
+      Title="WatchList" Loaded="Page_Loaded">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -17,7 +17,7 @@
         <Grid  Background="#202020" Grid.Row="0">
             <Label FontWeight="SemiBold" 
                    Grid.Column="0" Foreground="White"
-                   Content="My Watchlists" FontSize="35" Padding="15 0 0 0" 
+                   Content="My Watchlists" FontSize="35" Padding="30 0 0 0" 
                    VerticalAlignment="Center"/>
         </Grid>
 
@@ -30,9 +30,9 @@
                          Text="0" FontSize="18" Margin="0 2 0 0"
                          x:Name="txtTotalItem"/>
                 <Label Style="{StaticResource labelDF}" HorizontalAlignment="Left" Margin="15 0 0 0"
-                    Content="average rating: " FontSize="16" Width="auto"/>
+                    Content="your average rating: " FontSize="16" Width="auto"/>
                 <TextBox Style="{StaticResource textBoxNoCnH}" VerticalAlignment="Center"
-                         Text="0%" FontSize="18" Margin="0 2 0 0"
+                         Text="0" FontSize="18" Margin="0 2 0 0"
                          x:Name="txtPercent"/>
             </StackPanel>
         </Border>

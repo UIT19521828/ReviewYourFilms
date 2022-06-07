@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:ReviewYourFilms"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1350"
-      Title="TopOfApp" Loaded="Page_Loaded">
+      Title="TopOfApp">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -15,7 +15,7 @@
         <Border BorderThickness="0 0 0 0.4" BorderBrush="#A3A6AA" Background="#202020">
             <Label FontWeight="SemiBold"
                 Grid.Column="0" Foreground="White"
-                Content="RvF Charts" FontSize="35" Margin="15,0,0,0"
+                Content="RvF Charts" FontSize="35" Margin="30,0,0,0"
                 VerticalAlignment="Center"/>
         </Border>
         <Grid Grid.Row="1">
@@ -28,14 +28,14 @@
                 <RadioButton Style="{StaticResource menuButton}" Height="25"
                              Margin="15 20 7 0" x:Name="btn100Movie"
                              Click="btn100Movie_Click">
-                    <TextBlock Text="Top 100 Movies" 
-                     Style="{StaticResource menuButtonText}" Foreground="#6691B0"/>
+                    <TextBlock Text="Top 100 Movies" Margin="7 0 0 0"
+                               Style="{StaticResource menuButtonText}" Foreground="#6691B0"/>
                 </RadioButton>
                 <RadioButton Style="{StaticResource menuButton}" Height="25"
                              Margin="15 2 7 0" x:Name="btn100TV"
                              Click="btn100TV_Click">
-                    <TextBlock Text="Top 100 TV Series" 
-                     Style="{StaticResource menuButtonText}" Foreground="#6691B0"/>
+                    <TextBlock Text="Top 100 TV Series" Margin="7 0 0 0"
+                               Style="{StaticResource menuButtonText}" Foreground="#6691B0"/>
                 </RadioButton>
             </StackPanel>
             <Grid Grid.Column="1">

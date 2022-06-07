@@ -57,22 +57,30 @@ namespace ReviewYourFilms
         }
         private void LoadPanel()
         {
-            int p = 0, c = 0;
             panelWL.Children.Clear();
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 panelWL.Children.Add(item);
-                int x = int.Parse(item.txtMyRate.Text);
-                if(x >= 0)
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            int p = 0, c = 0;
+            double x;
+            foreach (var item in list)
+            {
+                if (item.score >= 0)
                 {
                     c++;
-                    p += x;
-                } 
+                    p += item.score;
+                }
             }
             if (c != 0)
             {
-                int percent = p * 10 / c;
-                txtPercent.Text = percent + "%";
+                x = p * 10 / c;
+                x = Math.Round(x, 1);
+                txtPercent.Text = x + "";
             }
         }
     }

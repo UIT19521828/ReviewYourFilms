@@ -1,0 +1,28 @@
+﻿<Window x:Class="ReviewYourFilms.Authentication.ChangeUserEmail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ma="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ReviewYourFilms.Authentication"
+        mc:Ignorable="d"
+        Title="ChangeUserEmail" Height="130" Width="600"
+        WindowStartupLocation="CenterScreen" Background="#2B2B38">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Label Style="{StaticResource labelDF}" HorizontalAlignment="Left"
+               Content="New Email: " Margin="7 0 0 0"/>
+        <TextBox Grid.Row="1" FontSize="20" Foreground="White"
+                 ma:HintAssist.Hint="Enter your new Email"
+                 VerticalAlignment="Center" Margin="10 0 0 0" x:Name="txtNewEmail"/>
+        <Button  BorderThickness="0" Background="DarkSlateBlue" Cursor="Hand"
+                 x:Name="btnChange" Margin="0 0 20 0"
+                 Grid.Row="2" Width="200" FontWeight="Bold" HorizontalAlignment="Right"
+                 Content="Change" FontSize="17" Padding="0 0 0 3"
+                 Click="btnChange_Click"/>
+    </Grid>
+</Window>

@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using Google.Cloud.Firestore;
 using ReviewYourFilms.Models;
 using System.Windows.Media.Animation;
+using ReviewYourFilms.Authentication;
 
 namespace ReviewYourFilms
 {
@@ -25,12 +26,13 @@ namespace ReviewYourFilms
         {
             InitializeComponent();
             db = AccountManager.Instance().LoadDB();
-            LoadTop10Mv();
-            LoadTop10TV();
+
             LoadBanner();
+            LoadTop10Mv();
+            LoadTop10TV();           
         }
         private async void LoadBanner()
-        {
+        {        
             Query query = db.Collection("Banners");
             QuerySnapshot qSS = await query.GetSnapshotAsync();
             foreach(var item in qSS)
@@ -46,7 +48,8 @@ namespace ReviewYourFilms
 
         private async void LoadTop10Mv()
         {
-            RowOfFilm rowt10 = new RowOfFilm("Top 10");
+            RowOfFilm rowt10 = new RowOfFilm("Top 10 Movies");
+            stackRowF.Children.Add(rowt10);
             Query query = db.Collection("Films").OrderByDescending("rating")
                 .OrderByDescending("numRate").WhereEqualTo("genre", "Movie")
                 .Limit(10);
@@ -54,13 +57,13 @@ namespace ReviewYourFilms
             foreach (DocumentSnapshot film in ssflim.Documents)
             {
                 DataFilm dtFilm = film.ConvertTo<DataFilm>();
-                rowt10.stackFilm.Children.Add(new ConFilm(dtFilm, film.Id));
-            }
-            stackRowF.Children.Add(rowt10);
+                rowt10.stackFilm.Children.Add(new ComFilm(dtFilm, film.Id));
+            }           
         }
         private async void LoadTop10TV()
         {
-            RowOfFilm rowt10 = new RowOfFilm("Top 10");
+            RowOfFilm rowt10 = new RowOfFilm("Top 10 TV Series");
+            stackRowF.Children.Add(rowt10);
             Query query = db.Collection("Films").OrderByDescending("rating")
                 .OrderByDescending("numRate").WhereEqualTo("genre", "TV series")
                 .Limit(10);
@@ -68,18 +71,22 @@ namespace ReviewYourFilms
             foreach (DocumentSnapshot film in ssflim.Documents)
             {
                 DataFilm dtFilm = film.ConvertTo<DataFilm>();
-                rowt10.stackFilm.Children.Add(new ConFilm(dtFilm, film.Id));
-            }
-            stackRowF.Children.Add(rowt10);
+                rowt10.stackFilm.Children.Add(new ComFilm(dtFilm, film.Id));
+            }           
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoopBanner();
+        }
+        private async void LoopBanner()
         {
             while (true)
             {
-                await Task.Delay(new TimeSpan(0, 0, 5)).ContinueWith(o => { NextBanner(); });
+                await Task.Delay(new TimeSpan(0, 0, 7)).ContinueWith(o => { NextBanner(); });
             }
         }
+
         private void NextBanner()
         {
             this.Dispatcher.Invoke(() =>

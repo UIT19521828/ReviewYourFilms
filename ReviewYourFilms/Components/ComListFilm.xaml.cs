@@ -26,8 +26,9 @@ namespace ReviewYourFilms.Components
         MainWindow main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         
         public string fID;
+        public int score = -1;
         private DataFilm data;       
-        private FirestoreDb db = AccountManager.Instance().LoadDB();
+        private FirestoreDb db = AccountManager.Instance().LoadDB();       
 
         public ComListFilm(DataFilm data, string fID)
         {
@@ -35,8 +36,8 @@ namespace ReviewYourFilms.Components
             this.data = data;
             this.fID = fID;
 
-            LoadWL_Film();
             LoadClientRate();
+            LoadWL_Film();            
         }
 
         private void LoadWL_Film()
@@ -51,9 +52,11 @@ namespace ReviewYourFilms.Components
             {
                 duration += " (" + data.eps + "eps)";
             }
-            txtTime.Text = duration + "";
+            txtTime.Text = duration;
             txtYear.Text = data.year + "";
+            txtDescript.Text = data.descript;
             txtGenre.Text = data.genre;
+            txtDir.Text = data.director;
             if (x < 70 && x > 40)
             {
                 pieHas.Fill = BaseColor.midHas;
@@ -88,12 +91,12 @@ namespace ReviewYourFilms.Components
             if (rvSS.Count > 0)
             {
                 DataReview dataReview = rvSS[0].ConvertTo<DataReview>();
-                int p = dataReview.score;
-                txtMyRate.Text = p + "";
+                score = dataReview.score;
+                txtMyRate.Text = score + "";
                 tempRate.Visibility = Visibility.Collapsed;
                 myRate.Visibility = Visibility.Visible;
-                if (p < 7 && p > 4) fillE.Fill = BaseColor.midHas;
-                if (p < 4) fillE.Fill = BaseColor.lowHas;
+                if (score < 7 && score > 4) fillE.Fill = BaseColor.midHas;
+                if (score < 4) fillE.Fill = BaseColor.lowHas;
             }
         }
 

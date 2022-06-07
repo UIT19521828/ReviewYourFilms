@@ -29,8 +29,14 @@ namespace ReviewYourFilms
         {
             InitializeComponent();
 
+            LoadAllTop("Movie");
             LoadAllTop("TV series");
-            LoadAllTop("Movie");            
+            btn100Movie.IsChecked = true;
+
+            foreach (var item in movies)
+            {
+                panelTop.Children.Add(item);
+            }
         }
 
         private async void LoadAllTop(string gr)
@@ -69,15 +75,6 @@ namespace ReviewYourFilms
                 panelTop.Children.Add(item);
             }
             lbChartName.Content = "Top 100 TV series";
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            btn100Movie.IsChecked = true;
-            foreach (var item in movies)
-            {
-                panelTop.Children.Add(item);
-            }
         }
     }
 }

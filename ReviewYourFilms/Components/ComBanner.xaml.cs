@@ -34,7 +34,6 @@ namespace ReviewYourFilms.Components
             this.banner = banner;
             this.film = film;
             this.fID = fID;
-
             LoadBanner();
         }
 
