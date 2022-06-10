@@ -21,6 +21,7 @@ namespace ReviewYourFilms
         MainWindow main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 
         private FirestoreDb db;
+        private DataFirestore firestore = DataFirestore.Instance();
 
         public HomePage()
         {
@@ -57,7 +58,9 @@ namespace ReviewYourFilms
             foreach (DocumentSnapshot film in ssflim.Documents)
             {
                 DataFilm dtFilm = film.ConvertTo<DataFilm>();
-                rowt10.stackFilm.Children.Add(new ComFilm(dtFilm, film.Id));
+                firestore.AddFirestore(dtFilm, film.Id);
+                rowt10.stackFilm.Children.Add(new ComFilm(
+                    firestore.GetFirestore(film.Id), film.Id));
             }           
         }
         private async void LoadTop10TV()
@@ -71,7 +74,9 @@ namespace ReviewYourFilms
             foreach (DocumentSnapshot film in ssflim.Documents)
             {
                 DataFilm dtFilm = film.ConvertTo<DataFilm>();
-                rowt10.stackFilm.Children.Add(new ComFilm(dtFilm, film.Id));
+                firestore.AddFirestore(dtFilm, film.Id);
+                rowt10.stackFilm.Children.Add(new ComFilm(
+                    firestore.GetFirestore(film.Id), film.Id));
             }           
         }
 

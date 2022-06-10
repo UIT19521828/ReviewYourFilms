@@ -22,6 +22,8 @@ namespace ReviewYourFilms
     public partial class TopOfApp : Page
     {
         private FirestoreDb db = AccountManager.Instance().LoadDB();
+        private DataFirestore firestore = DataFirestore.Instance();
+
         private List<ComTopFilm> movies = new List<ComTopFilm>();
         private List<ComTopFilm> tvSeries = new List<ComTopFilm>();
 
@@ -51,8 +53,11 @@ namespace ReviewYourFilms
             foreach (var docS in qSS)
             {
                 DataFilm newF = docS.ConvertTo<DataFilm>();
-                if (gr == "Movie") movies.Add(new ComTopFilm(newF, docS.Id, i+1));
-                else tvSeries.Add(new ComTopFilm(newF, docS.Id, i + 1));
+                firestore.AddFirestore(newF, docS.Id);
+                if (gr == "Movie") movies.Add(new ComTopFilm(
+                    firestore.GetFirestore(docS.Id), docS.Id, i+1));
+                else tvSeries.Add(new ComTopFilm(
+                    firestore.GetFirestore(docS.Id), docS.Id, i + 1));
                 i++;
             }
         }

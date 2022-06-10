@@ -20,6 +20,7 @@ namespace ReviewYourFilms
     public partial class DetailFilm : Page
     {
         MainWindow main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+        private DataFirestore firestore = DataFirestore.Instance();
 
         private LibVLC lib;
         private LibVLCSharp.Shared.MediaPlayer mediaPlayer;
@@ -27,6 +28,7 @@ namespace ReviewYourFilms
         private string fid;
         private DocumentReference userRef;
         public WatchList wl;
+
         public DetailFilm(DataFilm film, string fid)
         {
             InitializeComponent();
@@ -40,6 +42,7 @@ namespace ReviewYourFilms
 
             LoadDetailFilm();
             LoadTopReview();
+            film.PropertyChanged += (s, e) => ChangeRate();
         }
         private void CreateButtonGenre(string item)
         {
@@ -59,12 +62,17 @@ namespace ReviewYourFilms
             border.Child = btnGenre;
             panelButtonG.Children.Add(border);
         }
-        private async void LoadDetailFilm()
+
+        private void ChangeRate()
         {
             float x = 0;
             if (film.numRate != 0) x = film.totalPoint / film.numRate;
             x = (float)Math.Round(x, 2);
-
+            lbAvgRate.Content = x + "/10";
+        }
+        private async void LoadDetailFilm()
+        {
+            ChangeRate();
             txtDescript.Text = film.descript;
             txtDir.Text = film.director;
             string duration = film.time + "min";
@@ -76,7 +84,7 @@ namespace ReviewYourFilms
             txtTime.Text = duration;
             txtTitle.Text = film.name;
             txtYear.Text = film.year +"";            
-            lbAvgRate.Content = x + "/10";
+            
             if (Client.watchlist.Contains(fid)) btnWL.Foreground = BaseColor.redBrush;
 
             imgPoster.ImageSource = film.GetImage();                     
@@ -87,8 +95,8 @@ namespace ReviewYourFilms
             QuerySnapshot mySS = await myR.GetSnapshotAsync();
             if(mySS.Count>0)
             {
-                DataReview dataReview = mySS[0].ConvertTo<DataReview>();
-                lbMyRate.Content = dataReview.score + "/10";
+                firestore.AddReview(mySS[0].ConvertTo<DataReview>(), mySS[0].Id);
+                lbMyRate.Content = firestore.GetReview(mySS[0].Id).score + "/10";
             }
 
             foreach(var item in film.category)
@@ -107,8 +115,9 @@ namespace ReviewYourFilms
             if(rvSS.Count > 0)
             {
                 lbTempReview.Visibility = Visibility.Collapsed;
-                DataReview dataReview = rvSS[0].ConvertTo<DataReview>();
-                ComReview topRv = new ComReview(dataReview, rvSS[0].Id, false);
+                firestore.AddReview(rvSS[0].ConvertTo<DataReview>(), rvSS[0].Id);
+                ComReview topRv = new ComReview(
+                    firestore.GetReview(rvSS[0].Id), rvSS[0].Id, false);
                 topRv.HorizontalAlignment = HorizontalAlignment.Left;
 
                 panelReview.Children.Add(topRv);
@@ -139,7 +148,8 @@ namespace ReviewYourFilms
                 mediaPlayer.Pause();
                 iconPlay.Kind = MaterialDesignThemes.Wpf.PackIconKind.PlayCircleOutline;
             }
-            main.NavHost.Content = new ReviewPage(film, fid);
+            main.NavHost.Content = new ReviewPage(
+                firestore.GetFirestore(fid), fid);
         }
         private async void WatchList_Click(object sender, RoutedEventArgs e)
         {

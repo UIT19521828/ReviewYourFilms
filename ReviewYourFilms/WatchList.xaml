@@ -15,10 +15,10 @@
             <RowDefinition Height="37*"/>
         </Grid.RowDefinitions>
         <Grid  Background="#202020" Grid.Row="0">
-            <Label FontWeight="SemiBold" 
+            <Label FontWeight="Medium" 
                    Grid.Column="0" Foreground="White"
-                   Content="My Watchlists" FontSize="35" Padding="30 0 0 0" 
-                   VerticalAlignment="Center"/>
+                   Content="My Watchlist" FontSize="35" Padding="30 0 0 0" 
+                   VerticalAlignment="Center" FontFamily="Impact"/>
         </Grid>
 
         <Border Grid.Row="1" BorderThickness="0 0 0 0.4" BorderBrush="#A3A6AA"

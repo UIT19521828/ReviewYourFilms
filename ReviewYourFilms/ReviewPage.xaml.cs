@@ -20,6 +20,7 @@ namespace ReviewYourFilms
     public partial class ReviewPage : Page
     {
         MainWindow main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+        private DataFirestore firestore = DataFirestore.Instance();
 
         private FirestoreDb db = AccountManager.Instance().LoadDB();
         private string fID;
@@ -62,7 +63,8 @@ namespace ReviewYourFilms
                 btnWrite.Visibility = Visibility.Collapsed;
                 btnEdit.Visibility = Visibility.Visible;
                 btnDelete.Visibility = Visibility.Visible;
-                tempRv = mySS[0].ConvertTo<DataReview>();
+                firestore.AddReview(mySS[0].ConvertTo<DataReview>(), mySS[0].Id);
+                tempRv = firestore.GetReview(mySS[0].Id);
 
                 LoadTemp();
 
@@ -107,8 +109,9 @@ namespace ReviewYourFilms
             QuerySnapshot qSS = await query.GetSnapshotAsync();
             foreach (DocumentSnapshot docR in qSS)
             {
-                DataReview infoReview = docR.ConvertTo<DataReview>();
-                ComReview view = new ComReview(infoReview, docR.Id, false);
+                firestore.AddReview(docR.ConvertTo<DataReview>(), docR.Id);
+                ComReview view = new ComReview(
+                    firestore.GetReview(docR.Id), docR.Id, false);
                 panelAllRv.Children.Add(view);
             }
         }
@@ -192,12 +195,14 @@ namespace ReviewYourFilms
             await filmRef.UpdateAsync("totalPoint", FieldValue.Increment(total));
             if (nRate != 0)
                 await filmRef.UpdateAsync("numRate", FieldValue.Increment(nRate));
+            data.numRate += nRate;
+            data.TotalScore += total;
         }
 
         private async void UpLoad_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult rs = MessageBox.Show("Upload this review?"
-                , "upload Review", MessageBoxButton.YesNo);
+                , "Upload Review", MessageBoxButton.YesNo);
             if (rs == MessageBoxResult.Yes)
             {
                 if (hasReview)
@@ -228,12 +233,15 @@ namespace ReviewYourFilms
                 };
                     tempRv = new DataReview(GetRtf(), fID, ratingBox.Value,
                                     txtRvTitle.Text, Client.uid, array, array, 0, 0);
-                    reviewRef = await db.Collection("Reviews").AddAsync(add);
+                    reviewRef = await db.Collection("Reviews").AddAsync(add);                    
+                    firestore.AddReview(tempRv, reviewRef.Id);
                     ChangeAvegRating(ratingBox.Value, 1);
                     hasReview = true;
                     btnDelete.Visibility = Visibility.Visible;
                 }
 
+                tempRv.ChangeData(GetRtf(), txtRvTitle.Text, ratingBox.Value);
+                tempRv.IsChanged++;
                 LoadTemp();
                 btnCancel.Visibility = Visibility.Collapsed;
                 btnUpload.Visibility = Visibility.Collapsed;
@@ -245,13 +253,12 @@ namespace ReviewYourFilms
                 MessageBox.Show("Upload review Success!");
 
                 DocumentReference fRef = db.Collection("Films").Document(fID);
-                DocumentSnapshot fSS = await fRef.GetSnapshotAsync();
-                DataFilm filmData = fSS.ConvertTo<DataFilm>();
+
                 double average = 0;
-                if (filmData.numRate != 0) average = (double)filmData.totalPoint / filmData.numRate;
+                if (data.numRate != 0) average = (double)data.totalPoint / data.numRate;
                 average = Math.Round(average, 4);
                 await fRef.UpdateAsync("rating", average);
-
+                
                 LoadAllReview();
             }          
         }
@@ -299,5 +306,6 @@ namespace ReviewYourFilms
                 }
             }
         }
+
     }
 }

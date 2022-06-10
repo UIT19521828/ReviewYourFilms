@@ -34,27 +34,21 @@ namespace ReviewYourFilms.Components
             this.data = data;
             this.fID = fID;
             this.index = index;
-
+            data.PropertyChanged += (s, e) => ChangeRate();
             LoadTopFilm();
         }
-
-        private void LoadTopFilm()
+        private void ChangeRate()
         {
             int x = 0;
-            if (data.numRate != 0) x = data.totalPoint / data.numRate * 10;
-
+            if (data.numRate != 0) x = data.totalPoint * 10 / data.numRate;
             txtPercent.Text = x.ToString();
-            txtTitle.Text = index + ". " + data.name;
-            string duration = data.time + "min";
-            if (data.genre == "TV series")
+
+            if (x >= 70)
             {
-                duration += " (" + data.eps + "eps)";
+                pieHas.Fill = BaseColor.highHas;
+                pieNo.Fill = BaseColor.highNo;
             }
-            txtTime.Text = duration;
-            txtGenre.Text = data.genre;
-            txtYear.Text = data.year + "";
-            txtDir.Text = data.director;
-            if (x < 70 && x > 40)
+            if (x < 70 && x >= 40)
             {
                 pieHas.Fill = BaseColor.midHas;
                 pieNo.Fill = BaseColor.midNo;
@@ -66,6 +60,21 @@ namespace ReviewYourFilms.Components
             }
             pieHas.Values = new ChartValues<ObservableValue> { new ObservableValue(x) };
             pieNo.Values = new ChartValues<ObservableValue> { new ObservableValue(100 - x) };
+        }
+
+        private void LoadTopFilm()
+        {
+            ChangeRate();
+            txtTitle.Text = index + ". " + data.name;
+            string duration = data.time + "min";
+            if (data.genre == "TV series")
+            {
+                duration += " (" + data.eps + "eps)";
+            }
+            txtTime.Text = duration;
+            txtGenre.Text = data.genre;
+            txtYear.Text = data.year + "";
+            txtDir.Text = data.director;
             if(data.poster!="") imgPoster.Source = data.GetImage();
 
             int i = 0;

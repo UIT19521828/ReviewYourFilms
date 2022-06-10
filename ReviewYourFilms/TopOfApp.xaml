@@ -13,17 +13,17 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Border BorderThickness="0 0 0 0.4" BorderBrush="#A3A6AA" Background="#202020">
-            <Label FontWeight="SemiBold"
-                Grid.Column="0" Foreground="White"
-                Content="RvF Charts" FontSize="35" Margin="30,0,0,0"
-                VerticalAlignment="Center"/>
+            <Label FontWeight="Medium"
+                   Grid.Column="0" Foreground="White"
+                   Content="RvF Charts" FontSize="35" Margin="30,0,0,0"
+                   VerticalAlignment="Center" FontFamily="Impact"/>
         </Border>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="0" BorderThickness="0 0 0.6 0" BorderBrush="#A3A6AA"/>
+            <Border Grid.Column="0" BorderThickness="0 0 1 0" BorderBrush="#A3A6AA"/>
             <StackPanel  Background="#202020">
                 <RadioButton Style="{StaticResource menuButton}" Height="25"
                              Margin="15 20 7 0" x:Name="btn100Movie"

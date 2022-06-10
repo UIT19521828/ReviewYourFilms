@@ -22,6 +22,8 @@ namespace ReviewYourFilms
     public partial class WatchList : Page
     {
         private FirestoreDb db = AccountManager.Instance().LoadDB();
+        private DataFirestore firestore = DataFirestore.Instance();
+
         public List<ComListFilm> list = new List<ComListFilm>();
         private int total = 0;
         public WatchList()
@@ -46,11 +48,14 @@ namespace ReviewYourFilms
             int cnt = 0;
             foreach(var item in Client.watchlist)
             {
-                DocumentReference wlRef = db.Collection("Films").Document(item);
-                DocumentSnapshot wlSS = await wlRef.GetSnapshotAsync();
-                DataFilm dataFilm = wlSS.ConvertTo<DataFilm>();
-
-                list.Add(new ComListFilm(dataFilm, wlSS.Id));
+                if (!firestore.IsFetch(item))
+                {
+                    DocumentReference wlRef = db.Collection("Films").Document(item);
+                    DocumentSnapshot wlSS = await wlRef.GetSnapshotAsync();
+                    DataFilm dataFilm = wlSS.ConvertTo<DataFilm>();
+                    firestore.AddFirestore(dataFilm, item);
+                }               
+                list.Add(new ComListFilm(firestore.GetFirestore(item), item));
                 cnt++;
             }
             Total = cnt;

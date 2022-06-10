@@ -17,8 +17,8 @@
             </Grid.ColumnDefinitions>
             <Ellipse Grid.Column="0" Width="64" Height="64"
                  VerticalAlignment="Top"
-                 HorizontalAlignment="Right"
-                 Margin="0 10 0 0">
+                 HorizontalAlignment="Right" Cursor="Hand"
+                 Margin="0 10 0 0" MouseDown="Ellipse_MouseDown">
                 <Ellipse.Fill>
                     <ImageBrush x:Name="imgReviewer" ImageSource="\Images\user.png"/>
                 </Ellipse.Fill>
@@ -89,7 +89,7 @@
                     <Label Content="written by:" Foreground="FloralWhite"
                            VerticalAlignment="Center" Margin="0 -1 0 0"/>
                     <TextBox Style="{StaticResource textboxNonCarret}"
-                             x:Name="txtReviewer"
+                             x:Name="txtReviewer" MouseDown="txtReviewer_MouseDown"
                              Text="Reviewer" VerticalAlignment="Center" Width="150"
                              FontWeight="SemiBold" FontSize="14"/>
                 </StackPanel>

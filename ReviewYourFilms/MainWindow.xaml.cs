@@ -23,10 +23,11 @@ namespace ReviewYourFilms
         private CornerRadius crNor = new CornerRadius(10);
         private CornerRadius crMax = new CornerRadius(0);
         private CornerRadius crSecond = new CornerRadius(0, 0, 10, 10);
-        public HomePage homePage = new HomePage();
-        public WatchList watchList = new WatchList();
-        public TopOfApp topOfApp = new TopOfApp();
-        public SearchPage searchPage = new SearchPage();
+        public HomePage homePage;
+        public WatchList watchList;
+        public TopOfApp topOfApp;
+        public SearchPage searchPage;
+        public FollowPage followPage;
 
         public FirestoreDb db;
 
@@ -37,13 +38,23 @@ namespace ReviewYourFilms
             this.MaxHeight = SystemParameters.WorkArea.Height + 7;
             this.MaxWidth = SystemParameters.WorkArea.Width + 7;
             ChangeStateWind();
-            menuBoard.Visibility = Visibility.Collapsed;
+            LoadMain();
+        }      
+        
+        private void LoadMain()
+        {
+            homePage = new HomePage();
+            watchList = new WatchList();
+            topOfApp = new TopOfApp();
+            searchPage = new SearchPage();
+            followPage = new FollowPage();
+          
             settingBoard.Visibility = Visibility.Collapsed;
             btnHomeP.IsChecked = true;
             NavHost.Content = homePage;
             txtUserN.Text = Client.userName;
-            imgClient.ImageSource = new BitmapImage(new Uri(Client.imageURL));
-        }       
+            if (Client.imageURL != "") imgClient.ImageSource = new BitmapImage(new Uri(Client.imageURL));
+        }
 
         private void BorderMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -84,9 +95,7 @@ namespace ReviewYourFilms
 
         private void OpenMenuBoard(object sender, RoutedEventArgs e)
         {
-            if(menuBoard.Visibility == Visibility.Visible) 
-                menuBoard.Visibility = Visibility.Collapsed;
-            else menuBoard.Visibility = Visibility.Visible;
+            popUpMenu.IsOpen = true;
         }
         private void OpenAccount(object sender, RoutedEventArgs e)
         {
@@ -101,39 +110,40 @@ namespace ReviewYourFilms
                 btnSetting.Foreground = BaseColor.blueBrush;
             }
         }
-
+        
         private void HomePage_Click(object sender, RoutedEventArgs e)
         {
             NavHost.Content = homePage;
-            menuBoard.Visibility = Visibility.Collapsed;
+            popUpMenu.IsOpen = false;
         }
 
         private void WatchL_Click(object sender, RoutedEventArgs e)
         {
             NavHost.Content = watchList;
-            menuBoard.Visibility = Visibility.Collapsed;
+            popUpMenu.IsOpen = false;
         }
 
         private void Top100_Click(object sender, RoutedEventArgs e)
         {
             NavHost.Content = topOfApp;
-            menuBoard.Visibility = Visibility.Collapsed;
+            popUpMenu.IsOpen = false;
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             NavHost.Content = searchPage;
-            menuBoard.Visibility = Visibility.Collapsed;
+            popUpMenu.IsOpen = false;
         }
-
+        
         private void Followed_Click(object sender, RoutedEventArgs e)
         {
-            
+            NavHost.Content = followPage;
+            followPage.LoadFollow();
+            popUpMenu.IsOpen = false;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            menuBoard.Visibility = Visibility.Collapsed;
             settingBoard.Visibility = Visibility.Collapsed;
             btnSetting.Foreground = BaseColor.defaultBrush;
         }
@@ -152,6 +162,11 @@ namespace ReviewYourFilms
         private void Window_Closed(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void ChatBot_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

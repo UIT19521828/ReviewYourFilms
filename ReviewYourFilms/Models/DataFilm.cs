@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
@@ -9,8 +11,9 @@ using Google.Cloud.Firestore;
 namespace ReviewYourFilms
 {
     [FirestoreData]
-    public class DataFilm
+    public class DataFilm : INotifyPropertyChanged
     {
+        
         [FirestoreProperty]
         public string name { get; set; }
         [FirestoreProperty]
@@ -45,6 +48,29 @@ namespace ReviewYourFilms
                 bit = new BitmapImage(new Uri(poster));               
             }           
             return bit;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public int TotalScore
+        {
+            get 
+            {
+                return totalPoint;
+            }
+            set
+            {
+                totalPoint = value;
+                NotifyPropertyChanged(nameof(TotalScore));
+            }
         }
     }
 }
