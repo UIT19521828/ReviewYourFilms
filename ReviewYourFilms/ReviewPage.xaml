@@ -150,7 +150,9 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
+            
             <Border BorderThickness="0 0 0.5 0" BorderBrush="#A3A6AA"/>
+            
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>

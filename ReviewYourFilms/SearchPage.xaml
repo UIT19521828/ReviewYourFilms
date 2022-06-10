@@ -9,54 +9,85 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SearchPage">
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid  Background="#202020">
-            <Label FontWeight="SemiBold"
+            <Label FontWeight="Medium"
                 Grid.Column="0" Foreground="White"
-                Content="Search Film" FontSize="35" Padding="30 0 0 0" 
-                VerticalAlignment="Center"/>
+                Content="Search Film" FontSize="35" Padding="10 0 0 0" 
+                VerticalAlignment="Center" FontFamily="Impact"/>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="20 0 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="55"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
             <ma:PackIcon Kind="Search" Foreground="Silver" Margin="15,0,0,0" 
                          Width="30" Height="30" VerticalAlignment="Center"/>
             <TextBox Foreground="#A3A6AA" VerticalAlignment="Center"
-                     FontSize="18" Grid.Column="1" ma:HintAssist.Hint="Search Film..."/>
-            <Button Grid.Column="2" Content="Search" Margin="3"/>
+                     Text="{Binding Path=_search, Mode=TwoWay}"
+                     KeyDown="SearchBox_KeyDown"
+                     FontSize="18" Grid.Column="1" ma:HintAssist.Hint="Search..."/>
+            <Label Content="By: " HorizontalAlignment="Right"
+                   Foreground="White" Grid.Column="2" VerticalAlignment="Center"
+                   FontWeight="DemiBold" FontSize="20"/>
+            <ComboBox Foreground="FloralWhite" IsEditable="False"
+                      Background="#252525" Margin="10,0,0,0"
+                      FontSize="18" SelectedValuePath="Content"
+                      Grid.Column="3" x:Name="cbxBy" SelectedIndex="0">
+                <ComboBoxItem Style="{StaticResource cbbItem}">Film Title</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Director</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Actor</ComboBoxItem>
+            </ComboBox>
+            <Button Grid.Column="4" Content="Search" Margin="3,4,3,4"
+                    ma:ButtonAssist.CornerRadius="15"
+                    Click="Search_Click"/>
         </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20 0 0 0">
             <ma:PackIcon Kind="Category" Foreground="Silver" Margin="15,0,0,0" 
                          Width="30" Height="30" VerticalAlignment="Center"/>
-            <ComboBox Foreground="#A3A6AA" VerticalAlignment="Center" 
-                      Background="#202020" Width="350" Margin="10 0 0 0"
-                      FontSize="18" IsEditable="True" SelectedValuePath="Content">
-                <ComboBoxItem>Action</ComboBoxItem>
-                <ComboBoxItem>Adventure</ComboBoxItem>
-                <ComboBoxItem>Animation</ComboBoxItem>
-                <ComboBoxItem>Anime</ComboBoxItem>
-                <ComboBoxItem>Comedy</ComboBoxItem>
-                <ComboBoxItem>Crime</ComboBoxItem>
-                <ComboBoxItem>Documentary</ComboBoxItem>
-                <ComboBoxItem>Drama</ComboBoxItem>
-                <ComboBoxItem>Family</ComboBoxItem>
-                <ComboBoxItem>Fantasy</ComboBoxItem>
-                <ComboBoxItem>History</ComboBoxItem>
-                <ComboBoxItem>Music</ComboBoxItem>
-                <ComboBoxItem>Mystery</ComboBoxItem>
-                <ComboBoxItem>Romance</ComboBoxItem>
-                <ComboBoxItem>Sport</ComboBoxItem>
-                <ComboBoxItem>War</ComboBoxItem>
+            <ComboBox Foreground="FloralWhite" VerticalAlignment="Center" IsEditable="False"
+                      Background="#252525" Width="350" Margin="10 0 0 0"
+                      FontSize="18" SelectedValuePath="Content"
+                      x:Name="cbxGenre" SelectedIndex="0">
+
+                <ComboBoxItem Style="{StaticResource cbbItem}">Action</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Adventure</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Animation</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Anime</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Comedy</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Crime</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Documentary</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Drama</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Family</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Fantasy</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">History</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Music</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Mystery</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Romance</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">Sport</ComboBoxItem>
+                <ComboBoxItem Style="{StaticResource cbbItem}">War</ComboBoxItem>
             </ComboBox>
+            <Button Grid.Column="2" Content="Discovery" Margin="3" 
+                    Click="Dicovery_Click"
+                    ma:ButtonAssist.CornerRadius="15" Background="MediumPurple"/>
         </StackPanel>
+        <Label Grid.Row="3" HorizontalAlignment="Center"
+               x:Name="lbPath" FontSize="18" Foreground="#B2B3B5"/>
+        <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Margin="20 0 0 0">
+            <WrapPanel x:Name="panelQuery" Orientation="Horizontal"/>
+        </ScrollViewer>
+        
     </Grid>
 </Page>

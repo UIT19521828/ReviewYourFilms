@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\App.xaml
-211328083074
+25-800018409
 1128492545958
-28-773854259
+341703605566
 165-728023608
-Authentication\ChangeUserEmail.xaml;Authentication\LoadingScreen.xaml;Components\ComBanner.xaml;Components\ComFilm.xaml;Components\ComListFilm.xaml;Components\ComReview.xaml;Components\ComTopFilm.xaml;Authentication\SignIn.xaml;AuthWindow.xaml;ProfileUser.xaml;Components\RowOfFilm.xaml;DetailFilm.xaml;HomePage.xaml;MainWindow.xaml;Resources\ComponentStyles.xaml;Resources\DefaultStyles.xaml;ReviewPage.xaml;SearchPage.xaml;Authentication\SignUp.xaml;TopOfApp.xaml;WatchList.xaml;
+Authentication\ChangeUserEmail.xaml;Authentication\LoadingScreen.xaml;Components\ChatBox.xaml;Components\ComBanner.xaml;Components\ComFilm.xaml;Components\ComFilmCrew.xaml;Components\ComListFilm.xaml;Components\ComReview.xaml;Components\ComTopFilm.xaml;Authentication\SignIn.xaml;AuthWindow.xaml;Components\Follower.xaml;FollowPage.xaml;ProfileUser.xaml;Components\RowOfFilm.xaml;DetailFilm.xaml;HomePage.xaml;MainWindow.xaml;Resources\ComponentStyles.xaml;Resources\DefaultStyles.xaml;ReviewPage.xaml;SearchPage.xaml;Authentication\SignUp.xaml;TopOfApp.xaml;WatchList.xaml;
 
 False
 

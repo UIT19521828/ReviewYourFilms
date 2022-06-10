@@ -1274,3 +1274,11 @@ E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Authentication\Loadin
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Authentication\LoadingScreen.baml
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Authentication\ChangeUserEmail.g.cs
 E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Authentication\ChangeUserEmail.baml
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Components\ChatBox.g.cs
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Components\ChatBox.baml
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Components\ComFilmCrew.g.cs
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Components\ComFilmCrew.baml
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Components\Follower.g.cs
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\Components\Follower.baml
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\FollowPage.g.cs
+E:\Visual Studio\ReviewYourFilms\ReviewYourFilms\obj\Debug\FollowPage.baml

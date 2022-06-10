@@ -23,11 +23,9 @@ namespace ReviewYourFilms.Components
     {
         MainWindow main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 
-
         private DataReview data;
         private FirestoreDb db = AccountManager.Instance().LoadDB();
         private string rID;
-        private int like, dis;
         private DataUser user;
         private DocumentReference reviewRef;
         private bool needTitle;
@@ -39,6 +37,8 @@ namespace ReviewYourFilms.Components
             this.data = data;
             this.rID = rID;
             this.needTitle = need;
+
+            data.PropertyChanged += (s, e) => DataChanged();
             reviewRef = db.Collection("Reviews").Document(rID);
             LoadReview();
         }
@@ -56,33 +56,45 @@ namespace ReviewYourFilms.Components
             if (kq)
             {
                 btnLike.Foreground = BaseColor.blueBrush;
-                like++;
+                data.countLike++;
                 data.isLike.Add(Client.uid);
             }
             else
             {
                 btnLike.Foreground = BaseColor.defaultBrush;
-                like--;
+                data.countLike--;
                 data.isLike.Remove(Client.uid);
             }
-            txtLike.Text = like + "";
-            
+            txtLike.Text = data.countLike + "";
         }
         private void SetDis(bool kq)
         {
             if (kq)
             {
                 btnDis.Foreground = BaseColor.lowHas;
-                dis++;
+                data.countDis++;
                 data.isDis.Add(Client.uid);
             }
             else
             {
                 btnDis.Foreground = BaseColor.defaultBrush;
-                dis--;
+                data.countDis--;
                 data.isDis.Remove(Client.uid);
             }
-            txtDis.Text = dis + "";
+            txtDis.Text = data.countDis + "";
+        }
+
+        private void DataChanged()
+        {
+            if (user.imageURL != "") imgReviewer.ImageSource = user.GetImage();
+            txtTitle.Text = data.title;
+            txtScore.Content = data.score;
+            SetRtf(data.content);
+            txtReviewer.Text = user.name;
+            txtLike.Text = data.countLike + "";
+            txtDis.Text = data.countDis + "";
+            if (ReturnIslike()) btnLike.Foreground = BaseColor.blueBrush;
+            if (ReturnIsDis()) btnDis.Foreground = BaseColor.lowHas;
         }
 
         private async void LoadReview()
@@ -98,18 +110,9 @@ namespace ReviewYourFilms.Components
                 DocumentSnapshot filmSS = await filmRef.GetSnapshotAsync();
                 film = filmSS.ConvertTo<DataFilm>();
                 txtFilmTitle.Text = film.name;
+                txtFilmTitle.Visibility = Visibility.Visible;
             }
-            if(user.imageURL != "") imgReviewer.ImageSource = user.GetImage();
-            txtTitle.Text = data.title;
-            txtScore.Content = data.score;
-            SetRtf(data.content);
-            txtReviewer.Text = user.name;
-            like = data.countLike;
-            dis = data.countDis;
-            txtLike.Text = like + "";
-            txtDis.Text = dis + "";
-            if(ReturnIslike()) btnLike.Foreground = BaseColor.blueBrush;
-            if(ReturnIsDis()) btnDis.Foreground = BaseColor.lowHas;
+            DataChanged();
         }
 
         private void btnDis_Click(object sender, RoutedEventArgs e)
@@ -193,6 +196,19 @@ namespace ReviewYourFilms.Components
                 rtbContent.Selection.Load(reader, DataFormats.Rtf);
             }
         }
+        private void OpenReviewer()
+        {
+            ProfileUser profile = new ProfileUser(data.user, main);
+            profile.Show();
+        }
+        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OpenReviewer();
+        }
 
+        private void txtReviewer_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OpenReviewer();
+        }
     }
 }

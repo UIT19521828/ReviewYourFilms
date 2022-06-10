@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="ReviewYourFilms.Components.ChatBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:ma="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReviewYourFilms.Components"
+             mc:Ignorable="d" 
+             Width="600" Height="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="White" BorderThickness="1.5" CornerRadius="15"
+                 Background="#30363D">
+            <Grid Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Choose your Film: " FontWeight="SemiBold"
+                       Foreground="AntiqueWhite" FontSize="14"/>
+                <Border CornerRadius="12" Grid.Row="1" Background="#181818">
+                    <ComboBox Grid.Row="1"  FontSize="20"
+                              IsEditable="False" VerticalAlignment="Top"/>
+                </Border>
+
+                <Label Content="Recommendation: " FontWeight="SemiBold"
+                       Foreground="PaleVioletRed" Grid.Row="2"
+                       FontSize="18"/>
+                <Border Grid.Row="3" Background="#181818" CornerRadius="12">
+                    <WrapPanel />
+                </Border>
+            </Grid>
+        </Border>
+        <Polygon Grid.Row="1" HorizontalAlignment="Right"
+                 Margin="0 0 35 0" StrokeThickness="0"
+                 Points="0,0 25,30, 50,0" Stroke="Black" Fill="WhiteSmoke" />
+    </Grid>
+</UserControl>

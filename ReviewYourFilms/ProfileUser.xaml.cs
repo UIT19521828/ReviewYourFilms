@@ -21,6 +21,8 @@ namespace ReviewYourFilms
     /// </summary>
     public partial class ProfileUser : Window
     {
+        private DataFirestore firestore = DataFirestore.Instance();
+
         private DataUser _user;
         private bool isExpand = false;
         private DocumentReference clientRef;
@@ -53,8 +55,9 @@ namespace ReviewYourFilms
             QuerySnapshot snapshots = await query.GetSnapshotAsync();
             foreach (var reviewSS in snapshots)
             {
-                DataReview rv = reviewSS.ConvertTo<DataReview>();
-                ComReview viewReview = new ComReview(rv, reviewSS.Id, true);
+                firestore.AddReview(reviewSS.ConvertTo<DataReview>(), reviewSS.Id);
+                ComReview viewReview = new ComReview(
+                    firestore.GetReview(reviewSS.Id), reviewSS.Id, true);
                 mReview.Add(viewReview);
             }
 
@@ -260,6 +263,24 @@ namespace ReviewYourFilms
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left) DragMove();
+        }
+
+        private async void Follow_Click(object sender, RoutedEventArgs e)
+        {
+            if (Client.followed.Contains(uid))
+            {
+                btnFollow.Content = "Follow";
+                btnFollow.Background = BaseColor.greyBrush;
+                Client.followed.Remove(uid);
+                await clientRef.UpdateAsync("followed", FieldValue.ArrayRemove(uid));
+            }
+            else
+            {
+                btnFollow.Content = "Followed";
+                btnFollow.Background = Brushes.Red;
+                Client.followed.Add(uid);
+                await clientRef.UpdateAsync("followed", FieldValue.ArrayUnion(uid));
+            }
         }
     }
 }
