@@ -33,6 +33,7 @@
                 </ScrollViewer>
 
             </Border>
+            <DockPanel Grid.Column="1" x:Name="panelProfile"/>
         </Grid>
     </Grid>
 </Page>

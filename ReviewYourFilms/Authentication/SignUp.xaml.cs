@@ -91,7 +91,10 @@ namespace ReviewYourFilms.Authentication
 
         private void txtRePass_KeyDown(object sender, KeyEventArgs e)
         {
-            SignUp_Click(sender, e);
+            if (e.Key == Key.Enter)
+            {
+                SignUp_Click(sender, e);
+            }           
         }
     }
 }

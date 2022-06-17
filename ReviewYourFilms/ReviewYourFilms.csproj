@@ -544,6 +544,11 @@
   <ItemGroup>
     <Resource Include="Images\tmdb.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\emmy.png" />
+    <Resource Include="Images\oscar.png" />
+    <Resource Include="Images\razz.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Grpc.Core.2.41.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.2.41.0\build\net45\Grpc.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -163,7 +163,13 @@ namespace ReviewYourFilms
             db = LoadDB();
             try
             {
-                await authProvider.ChangeUserEmail(Client.token, email);      
+                await authProvider.ChangeUserEmail(Client.token, email);
+                Dictionary<string, object> updateEmail = new Dictionary<string, object>
+                {
+                    { "email", email },
+                };              
+                DocumentReference docRef = db.Collection("Users").Document(Client.uid);
+                await docRef.UpdateAsync(updateEmail);
             }
             catch (Exception ex)
             {

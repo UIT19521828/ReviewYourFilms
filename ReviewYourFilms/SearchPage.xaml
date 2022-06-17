@@ -85,7 +85,7 @@
                x:Name="lbPath" FontSize="18" Foreground="#B2B3B5"/>
         <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
-                      Margin="20 0 0 0">
+                      Margin="35 0 0 0">
             <WrapPanel x:Name="panelQuery" Orientation="Horizontal"/>
         </ScrollViewer>
         

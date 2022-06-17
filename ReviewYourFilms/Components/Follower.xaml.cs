@@ -20,17 +20,31 @@ namespace ReviewYourFilms.Components
     /// </summary>
     public partial class Follower : UserControl
     {
+        MainWindow main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+
         private DataUser data;
-        public Follower(DataUser data)
+        private string followID;
+        public Follower(DataUser data, string followID)
         {          
             InitializeComponent();
             this.data = data;
+            this.followID = followID;
             DataContext = data;
             LoadData();
         }
         private void LoadData()
         {
             imgAvatar.ImageSource = data.GetImage();
+        }
+
+        private void txtName_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            main.followPage.panelProfile.Children.Clear();
+            ProfileUser pu = new ProfileUser(followID, main);
+            pu.gridLabel.Visibility = Visibility.Collapsed;
+            main.followPage.panelProfile.Children.Add(
+                pu);
+            pu.Show();
         }
     }
 }
