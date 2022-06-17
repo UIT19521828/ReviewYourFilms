@@ -46,7 +46,7 @@ namespace ReviewYourFilms.Components
 
         private async void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            main.Content = page;
+            main.NavHost.Content = page;
             page.panelQuery.Children.Clear();
             Query filmQ = null;
             if (isDir)

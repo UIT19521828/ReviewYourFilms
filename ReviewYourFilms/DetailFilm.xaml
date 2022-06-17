@@ -8,7 +8,7 @@
       xmlns:local="clr-namespace:ReviewYourFilms" 
       xmlns:vlc="clr-namespace:LibVLCSharp.WPF;assembly=LibVLCSharp.WPF"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1450"
+      d:DesignHeight="1000" d:DesignWidth="1450"
       Title="DetailFilm" Background="Transparent">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto"
@@ -18,7 +18,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="375"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="320"/>
+                    <RowDefinition Height="116*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -107,7 +108,7 @@
                                         Background="Transparent"
                                         x:Name="iconPlay" Width="70" Height="70" 
                                         Margin="-18 -2 -10 -2"
-                                        Kind="PauseCircleOutline"/>
+                                        Kind="PlayCircleOutline"/>
                                 </Button>
                             </vlc:VideoView>
                         </Border>
@@ -115,7 +116,7 @@
                     <Grid Grid.Column="2">
                         <StackPanel Margin="25 0 0 0">
                             <StackPanel Orientation="Horizontal">
-                                <Border Background="#2D2D31" Height="160" Width="300"
+                                <Border Background="#2D2D31" Height="185" Width="300"
                                         VerticalAlignment="Top" HorizontalAlignment="Left"
                                         Style="{StaticResource borderRainbow}"
                                         CornerRadius="8" BorderThickness="0.5"                      
@@ -147,7 +148,12 @@
                                                      Style="{StaticResource textboxNonCarret}"
                                                      Text="Director" FontSize="14"/>
                                         </StackPanel>
-
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Country: " Style="{StaticResource labelDF}"/>
+                                            <TextBox x:Name="txtCountry" VerticalAlignment="Center"
+                                                     Style="{StaticResource textboxNonCarret}"
+                                                     Text="Country" FontSize="14"/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
                                 <Button VerticalAlignment="Top" Background="Transparent" Margin="10 0 0 0"
@@ -174,7 +180,7 @@
 
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="2" Margin="15">
+                <Grid Grid.Row="2" Margin="15,15,15,15" Grid.RowSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="730"/>
@@ -185,22 +191,37 @@
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="50"/>
+                            <RowDefinition Height="160"/>
+                            <RowDefinition Height="50"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
                         <Label Content="Genre" FontSize="20"
                                FontWeight="Bold" Foreground="White"/>
-                        <WrapPanel x:Name="panelButtonG" Grid.Row="1" Orientation="Horizontal" Grid.RowSpan="2"/>
-                        <Label Content="Actor" FontSize="20" Grid.Row="2"
+                        <WrapPanel x:Name="panelButtonG" Grid.Row="1" 
+                                   Orientation="Horizontal"/>
+
+                        <Label Content="Award" FontSize="20" Grid.Row="2"
                                FontWeight="Bold" Foreground="White"/>
-                        <Border Style="{StaticResource borderRainbow}" Grid.Row="3"
-                                CornerRadius="12" BorderThickness="0.5">
-                            <ScrollViewer  HorizontalScrollBarVisibility="Auto"
-                                      VerticalScrollBarVisibility="Disabled">
-                                <WrapPanel x:Name="panelActor" Orientation="Horizontal"/>
-                            </ScrollViewer>
-                        </Border>
-                        
-                        
+                        <WrapPanel x:Name="panelAward" Grid.Row="3" 
+                                   Orientation="Horizontal">
+                            <Border Padding="10 0 10 0" BorderThickness="0.5" BorderBrush="White"
+                                    CornerRadius="10">
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="\Images\oscar.png" Height="120"/>
+                                    <TextBlock FontSize="18" Text="Oscar" Foreground="Silver"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Padding="10 0 10 0" BorderThickness="0.5" BorderBrush="White"
+                                    CornerRadius="10" Margin="20 0 0 0">
+                                <StackPanel Orientation="Vertical">
+                                    <Image Source="\Images\emmy.png" Height="120"/>
+                                    <TextBlock FontSize="18" Text="Emmy" 
+                                           Foreground="Silver" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+      
+                        </WrapPanel>
                     </Grid>
 
                     <Grid Grid.Column="1">
@@ -229,7 +250,7 @@
                             </Border>
                         </StackPanel>
                         <DockPanel x:Name="panelReview" LastChildFill="True"
-                                   Height="300" VerticalAlignment="Top"
+                                   Height="265" VerticalAlignment="Top"
                                    Grid.Row="1" Margin="0 10 0 0" HorizontalAlignment="Left">
                             <Label Style="{StaticResource labelDF}" HorizontalAlignment="Left"
                                    Width="auto" x:Name="lbTempReview"
@@ -237,6 +258,20 @@
                         </DockPanel>
                     </Grid>
                 </Grid>
+
+                <StackPanel Grid.Row="3" Margin="35 35 20 0">
+                    <Label Content="Actor" FontSize="20" Height="50"
+                               FontWeight="Bold" Foreground="White"/>
+                    <Border Style="{StaticResource borderRainbow}"
+                            CornerRadius="12" BorderThickness="0.5"
+                            Width="auto">
+                        <ScrollViewer  HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Disabled">
+                            <WrapPanel x:Name="panelActor" Orientation="Horizontal"
+                                       />
+                        </ScrollViewer>
+                    </Border>
+                </StackPanel>
             </Grid>
         </Border>
     </ScrollViewer>

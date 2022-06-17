@@ -39,6 +39,8 @@ namespace ReviewYourFilms
         [FirestoreProperty]
         public string director { get; set; }
         [FirestoreProperty]
+        public string country { get; set; }
+        [FirestoreProperty]
         public string[] actor { get; set; }
 
         private BitmapImage bit = null;

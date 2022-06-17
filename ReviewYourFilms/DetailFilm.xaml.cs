@@ -92,12 +92,14 @@ namespace ReviewYourFilms
             txtGenre.Text = film.genre;
             txtTime.Text = duration;
             txtTitle.Text = film.name;
-            txtYear.Text = film.year +"";            
+            txtYear.Text = film.year +"";
+            txtCountry.Text = film.country;
             
             if (Client.watchlist.Contains(fid)) btnWL.Foreground = BaseColor.redBrush;
 
             imgPoster.ImageSource = film.GetImage();                     
             mediaPlayer.Play(new Media(lib, new Uri(film.trailer)));
+            mediaPlayer.Pause();
 
             Query myR = main.db.Collection("Reviews").WhereEqualTo("user", Client.uid)
                     .WhereEqualTo("film", fid);

@@ -23,7 +23,7 @@
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <TextBox  x:Name="txtName" Foreground="White"
+                <TextBox  x:Name="txtName" Foreground="White" MouseDown="txtName_MouseDown"
                           VerticalAlignment="Center" Margin="2 10 0 0"
                           FontSize="18" Text="{Binding Path=name, Mode=OneWay}"
                           FontWeight="DemiBold" Style="{StaticResource textboxNonCarret}"/>

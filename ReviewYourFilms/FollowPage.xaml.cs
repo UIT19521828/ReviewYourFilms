@@ -34,7 +34,7 @@ namespace ReviewYourFilms
             {
                 DocumentReference flRef = db.Collection("Users").Document(item);
                 DocumentSnapshot flSS = await flRef.GetSnapshotAsync();
-                panelFollowing.Children.Add(new Follower(flSS.ConvertTo<DataUser>()));
+                panelFollowing.Children.Add(new Follower(flSS.ConvertTo<DataUser>(), flSS.Id));
             }
         }
     }

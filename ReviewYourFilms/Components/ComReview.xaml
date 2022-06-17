@@ -6,8 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ReviewYourFilms.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="300" MaxHeight="400" Margin="5"
-             Width="800">
+             d:DesignHeight="300" MaxHeight="400" Margin="0 5 5 5"
+             MaxWidth="800" d:DesignWidth="700">
     <Border x:Name="borderComment" CornerRadius="12" BorderThickness="0.5"
             BorderBrush="#A3A6AA">
         <Grid>
