@@ -38,6 +38,8 @@ namespace ReviewYourFilms
         public int eps { get; set; }
         [FirestoreProperty]
         public string director { get; set; }
+        [FirestoreProperty]
+        public string[] actor { get; set; }
 
         private BitmapImage bit = null;
 

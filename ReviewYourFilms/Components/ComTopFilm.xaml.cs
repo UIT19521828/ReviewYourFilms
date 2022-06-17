@@ -98,5 +98,14 @@ namespace ReviewYourFilms.Components
         {
             main.NavHost.Content = new DetailFilm(data, fID);
         }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            int x = 0;
+            if (data.numRate != 0) x = data.totalPoint * 10 / data.numRate;
+            main.topOfApp.txtAvgRating.Text = x + "";
+            main.topOfApp.chooseTitle.Text = data.name;
+            main.topOfApp.txtNumRate.Text = data.numRate.ToString();
+        }
     }
 }

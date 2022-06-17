@@ -77,7 +77,7 @@ namespace ReviewYourFilms
             }
         }
 
-        private async void Dicovery_Click(object sender, RoutedEventArgs e)
+        public async void Dicovery_Click(object sender, RoutedEventArgs e)
         {
             panelQuery.Children.Clear();
             string selectedCbx = ((ComboBoxItem)cbxGenre.SelectedItem).Content.ToString();

@@ -39,7 +39,7 @@ namespace ReviewYourFilms.Authentication
             {
                 if (await AccountManager.Instance().SignIn(txtEmail.Text, txtPass.Password))
                 {
-                    MessageBox.Show("Sign in success!");
+                    MessageBox.Show("Sign in success!", "Sign in");
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();   
                     authW.Hide();
