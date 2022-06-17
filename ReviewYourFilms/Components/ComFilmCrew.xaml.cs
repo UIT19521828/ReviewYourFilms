@@ -20,6 +20,8 @@ namespace ReviewYourFilms.Components
     /// </summary>
     public partial class ComFilmCrew : UserControl
     {
+        MainWindow main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+
         private FirestoreDb db = AccountManager.Instance().LoadDB();
         private DataFirestore firestore = DataFirestore.Instance();
         public string pID { get; set; }
@@ -44,6 +46,7 @@ namespace ReviewYourFilms.Components
 
         private async void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            main.Content = page;
             page.panelQuery.Children.Clear();
             Query filmQ = null;
             if (isDir)

@@ -58,9 +58,18 @@ namespace ReviewYourFilms
             btnGenre.Foreground = Brushes.White;
             btnGenre.Background = Brushes.Transparent;
             btnGenre.Content = item;
+            btnGenre.Click += BtnGenre_Click;
 
             border.Child = btnGenre;
             panelButtonG.Children.Add(border);
+        }
+
+        private void BtnGenre_Click(object sender, RoutedEventArgs e)
+        {
+            Button btnGenre = sender as Button;
+            main.NavHost.Content = main.searchPage;
+            main.searchPage.cbxGenre.Text = btnGenre.Content.ToString();
+            main.searchPage.Dicovery_Click(sender, e);
         }
 
         private void ChangeRate()
@@ -103,8 +112,21 @@ namespace ReviewYourFilms
             {
                 CreateButtonGenre(item);
             }
-            
+            LoadActor();
         }
+
+        private async void LoadActor()
+        {
+            foreach(var item in film.actor)
+            {
+                DocumentReference actorRef = main.db.Collection("Actors").Document(item);
+                DocumentSnapshot actorSS = await actorRef.GetSnapshotAsync();
+                DataPeople actor = actorSS.ConvertTo<DataPeople>();
+                ComFilmCrew crew = new ComFilmCrew(actor, actorSS.Id, false, main.searchPage);
+                panelActor.Children.Add(crew);
+            }
+        }
+
         private async void LoadTopReview()
         {
             Query rvRef = main.db.Collection("Reviews").WhereEqualTo("film", fid)
@@ -161,12 +183,10 @@ namespace ReviewYourFilms
                 Client.watchlist.Add(fid);
                 btnWL.Foreground = BaseColor.redBrush;
 
-                DocumentReference wlRef = main.db.Collection("Films").Document(fid);
-                DocumentSnapshot wlSS = await wlRef.GetSnapshotAsync();
-                DataFilm dataFilm = wlSS.ConvertTo<DataFilm>();
-                wl.list.Add(new ComListFilm(dataFilm, wlSS.Id));
+                wl.list.Add(new ComListFilm(film, fid));
                 wl.Total++;
             }
+
             else
             {
                 await userRef.UpdateAsync("watchlist", FieldValue.ArrayRemove(fid));
