@@ -43,6 +43,7 @@ namespace ReviewYourFilms
             LoadDetailFilm();
             LoadTopReview();
             film.PropertyChanged += (s, e) => ChangeRate();
+            
         }
         private void CreateButtonGenre(string item)
         {
@@ -201,13 +202,15 @@ namespace ReviewYourFilms
             }
             
         }
-        protected virtual void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        protected virtual void OnNavigatedFrom(NavigatingCancelEventArgs e)
         {
+            this.OnNavigatedFrom(e);
             if (mediaPlayer.IsPlaying)
             {
                 mediaPlayer.Pause();
                 iconPlay.Kind = MaterialDesignThemes.Wpf.PackIconKind.PlayCircleOutline;
             }
         }
+        
     }
 }
