@@ -100,7 +100,6 @@ namespace ReviewYourFilms
 
             imgPoster.ImageSource = film.GetImage();                     
             mediaPlayer.Play(new Media(lib, new Uri(film.trailer)));
-            mediaPlayer.Pause();
 
             Query myR = main.db.Collection("Reviews").WhereEqualTo("user", Client.uid)
                     .WhereEqualTo("film", fid);

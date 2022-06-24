@@ -24,7 +24,7 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="500"/>
-                <ColumnDefinition Width="277*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border BorderThickness="0 0 0.5 0" BorderBrush="#A3A6AA">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
@@ -33,7 +33,8 @@
                 </ScrollViewer>
 
             </Border>
-            <DockPanel Grid.Column="1" x:Name="panelProfile"/>
+            <Grid Grid.Column="1" x:Name="panelProfile"
+                    Background="Transparent"/>
         </Grid>
     </Grid>
 </Page>

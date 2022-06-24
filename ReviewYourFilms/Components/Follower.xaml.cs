@@ -39,12 +39,7 @@ namespace ReviewYourFilms.Components
 
         private void txtName_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            main.followPage.panelProfile.Children.Clear();
-            ProfileUser pu = new ProfileUser(followID, main);
-            pu.gridLabel.Visibility = Visibility.Collapsed;
-            main.followPage.panelProfile.Children.Add(
-                pu);
-            pu.Show();
+            
         }
     }
 }

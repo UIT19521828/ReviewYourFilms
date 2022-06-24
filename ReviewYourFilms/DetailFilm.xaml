@@ -108,7 +108,7 @@
                                         Background="Transparent"
                                         x:Name="iconPlay" Width="70" Height="70" 
                                         Margin="-18 -2 -10 -2"
-                                        Kind="PlayCircleOutline"/>
+                                        Kind="PauseCircleOutline"/>
                                 </Button>
                             </vlc:VideoView>
                         </Border>

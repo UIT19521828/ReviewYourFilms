@@ -66,8 +66,11 @@ namespace ReviewYourFilms.Components
         {
             ChangeRate();
             txtTitle.Text = data.name;
-            bit = data.GetImage();
-            imgPoster.ImageSource = bit;
+            if (data.poster != null)
+            {
+                imgPoster.ImageSource = data.GetImage();
+            }
+            
         }
 
         private void NewDetail_Click(object sender, RoutedEventArgs e)

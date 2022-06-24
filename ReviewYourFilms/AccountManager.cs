@@ -70,16 +70,16 @@ namespace ReviewYourFilms
                         AuthTokenAsyncFactory = () => Task.FromResult(link.FirebaseToken),
                     }
                 );
-                /*if(link.User.IsEmailVerified == false)
+                if (link.User.IsEmailVerified == false)
                 {
-                    DialogResult rs = MessageBox.Show("Bạn chưa xác nhận email. Bạn có muốn gửi lại email xác nhận không", 
-                        "Email is not verify", MessageBoxButtons.YesNo);
-                    if(rs == DialogResult.Yes)
+                    MessageBoxResult rs = MessageBox.Show("Bạn chưa xác nhận email. Bạn có muốn gửi lại email xác nhận không",
+                        "Email is not verify", MessageBoxButton.YesNo);
+                    if (rs == MessageBoxResult.Yes)
                     {
                         await authProvider.SendEmailVerificationAsync(link.FirebaseToken);
                     }
                     return false;
-                }*/
+                }
                 Client.email = link.User.Email;
                 Client.uid = link.User.LocalId;
                 Client.token = link.FirebaseToken;
@@ -104,7 +104,7 @@ namespace ReviewYourFilms
             }
             catch
             {
-                MessageBox.Show("Fail to Sign In!");
+                System.Windows.MessageBox.Show("Fail to Sign In!");
                 return false;
             }
         }
